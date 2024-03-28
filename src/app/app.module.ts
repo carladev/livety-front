@@ -7,18 +7,27 @@ import { HabitsComponent } from './habits/habits.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatButtonModule} from '@angular/material/button';
+import { MenuComponent } from './menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
-    HabitsComponent
+    HabitsComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(),
@@ -26,4 +35,4 @@ import {MatCardModule} from '@angular/material/card';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

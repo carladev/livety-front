@@ -1,13 +1,37 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ habit.name }}</mat-card-title>
-    <mat-card-subtitle>{{ habit.id }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <div>
-      <label for="name">Habit name: </label>
-      <input id="name" [(ngModel)]="habit.name" placeholder="name" />
-    </div>
-  </mat-card-content>
-</mat-card>
+<body>
+  <div class="date-container">
+    @for (date of dailyDates; track date;) {
+    <ng-container *ngIf="date.selectedDay">
+      <span>{{ date.longWeekday }}</span>
+      <span>
+        {{ date.day }} {{ date.month }} {{ date.year }}</span
+      ></ng-container
+    >
+    }
+  </div>
+
+  <div class="dates-container">
+    @for (date of dailyDates; track date;) {
+    <button
+      mat-button
+      class="date-button"
+      [ngClass]="{ 'primary-color': date.selectedDay }"
+    >
+      <span class="weekday">{{ date.weekday }}</span
+      ><span>{{ date.day }}</span>
+    </button>
+    }
+  </div>
+
+  <div class="habits-container">
+    @for (habit of habits; track habit;) {
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="habit-header-image"></div>
+        <mat-card-title>{{ habit.title }}</mat-card-title>
+        <mat-card-subtitle>{{ habit.frequencyId }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    }
+  </div>
+</body>

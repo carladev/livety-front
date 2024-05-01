@@ -7,5 +7,24 @@ import { Component } from '@angular/core';
 })
 
 export class MenuComponent  {
+  menuItems: { icon:string, title: string, link: string }[] = [
 
+    {
+      icon: 'home',
+      title: 'Inicio',
+      link: '/home'
+    },
+    { icon: 'search',
+      title: 'Buscar',
+      link: '/search'
+    },
+    { icon: 'add',
+      title: 'Agregar',
+      link: '/add'
+    },
+    {icon: 'favorite',
+      title: 'Favoritos',
+      link: '/favorite'
+    }
+  ];
 }

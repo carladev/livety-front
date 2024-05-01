@@ -1,18 +1,10 @@
 <mat-toolbar color="primary" class="bottom-menu">
+  @for (menuItem of menuItems; track menuItem) {
   <div>
-    <mat-icon>home</mat-icon>
-    <span>Inicio</span>
+    <a mat-button [routerLink]="menuItem.link">
+      <mat-icon>{{ menuItem.icon }}</mat-icon>
+      <span>{{ menuItem.title }}</span>
+    </a>
   </div>
-  <div>
-    <mat-icon>search</mat-icon>
-    <span>Buscar</span>
-  </div>
-  <div>
-    <mat-icon>add</mat-icon>
-    <span>Agregar</span>
-  </div>
-  <div>
-    <mat-icon>favorite</mat-icon>
-    <span>Favoritos</span>
-  </div>
+  }
 </mat-toolbar>

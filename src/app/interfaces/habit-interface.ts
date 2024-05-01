@@ -1,10 +1,10 @@
 export interface Habit {
-  userHabitId: number;
+  userHabitId?: number;
   userId: number;
   frequencyId: string;
   title: string;
   color:string;
-  icon: string;
+  icon?: string;
   }
 
 export interface DailyDate {

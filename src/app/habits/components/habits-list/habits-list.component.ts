@@ -1,13 +1,13 @@
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
-import { DailyDate, Habit } from '../interfaces/habit-interface';
-import { HabitsService } from './habits.service';
+import { DailyDate, Habit } from '../../../interfaces/habit-interface';
+import { HabitsService } from '../../containers/habits.service';
 @Component({
-  selector: 'app-habits',
-  templateUrl: './habits.component.html',
-  styleUrl: './habits.component.css',
+  selector: 'app-habits-list',
+  templateUrl: './habits-list.component.html',
+  styleUrl: './habits-list.component.css',
 })
 
-export class HabitsComponent implements OnInit {
+export class HabitsListComponent implements OnInit {
   habits: Habit[] = [];
   dailyDates: DailyDate[] = [];
   constructor(private habitsService: HabitsService) { }
@@ -15,6 +15,12 @@ export class HabitsComponent implements OnInit {
   ngOnInit() {
    
   this.getDates();
+  this.habitsService.addHabit({
+    userId: 1,
+    frequencyId: 'daily',
+    title: 'test',
+    color: 'aa'})
+    this.habits;
     this.habitsService.getHabits().subscribe(res =>{
       this.habits = res
     })

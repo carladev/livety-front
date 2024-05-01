@@ -7,7 +7,4 @@ import { Injectable } from '@angular/core';
 export class HabitsService {
 
   constructor(private http: HttpClient) { }
-  getHabits() {
-    return this.http.get<any[]>('http://localhost:8888/user-habits/all');
-  }
 }

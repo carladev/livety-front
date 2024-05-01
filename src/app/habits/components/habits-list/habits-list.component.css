@@ -1,0 +1,63 @@
+body {
+  background-color: #f2f7fb;
+}
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.dates-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 30px 0;
+}
+
+.date-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.primary-color {
+  background-color: #007bff;
+  color: white;
+}
+
+span {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  padding-bottom: 8px;
+  font-weight: bold;
+}
+
+.weekday {
+  padding-bottom: 0px;
+  font-size: 10px;
+}
+
+.habits-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+mat-card {
+  margin-bottom: 20px;
+  border-radius: 24px;
+  width: 330px;
+}
+.habit-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}

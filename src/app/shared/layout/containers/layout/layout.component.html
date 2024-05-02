@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    [(opened)]="opened"
+    [mode]="isHandset ? 'over' : 'side'"
+  >
+    <app-menu [isHandset]="isHandset"></app-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-toolbar
+      [isHandset]="isHandset"
+      (toggleMenu)="onToggleMenu()"
+      (onBack)="onBack()"
+    ></app-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,15 @@
+@if (navigateBackButton) {
+<div>
+  <button mat-button (click)="onBack.emit()">
+    <mat-icon fontIcon="arrow_back"></mat-icon>
+  </button>
+</div>
+} @else { @if (isHandset) {
+<div>
+  <button mat-button (click)="toggleMenu.emit()">
+    <mat-icon fontIcon="menu"></mat-icon>
+  </button>
+</div>
+} }
+
+<div class="title">{{ title }}</div>

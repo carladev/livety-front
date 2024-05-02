@@ -13,40 +13,67 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HabitsListComponent } from './habits/components/habits-list/habits-list.component';
 import { HabitsComponent } from './habits/containers/habits.component';
 import { HttpClientModule } from '@angular/common/http';
-@NgModule({
-  declarations: [
-    AppComponent,
-    HabitsComponent,
-    HabitsListComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatTableModule,
-    MatToolbarModule,
-    ReactiveFormsModule
+import { MenuComponent } from './shared/layout/components/menu/menu.component';
+import { ToolbarComponent } from './shared/layout/components/toolbar/toolbar.component';
+import { LayoutComponent } from './shared/layout/containers/layout/layout.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { NotFoundComponent } from './not-found/containers/not-found.component';
+import {  RouterModule } from '@angular/router';
 
-  ],
-  providers: [
-    provideNativeDateAdapter(),
-    provideClientHydration(),
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+@NgModule({
+    declarations: [
+        AppComponent,
+        HabitsComponent,
+        HabitsListComponent,
+        LayoutComponent,
+        MenuComponent,
+        NotFoundComponent,
+        ToolbarComponent     
+    ],
+
+    providers: [
+        provideNativeDateAdapter(),
+        provideClientHydration(),
+        provideAnimationsAsync()
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+ 
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSlideToggleModule,
+        MatSidenavModule,
+        MatTableModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        RouterModule,
+        RouterModule.forRoot([
+          {
+            path: '',
+            component: LayoutComponent,
+            children: [
+              {
+                path: 'habits',
+                component: HabitsComponent
+              },
+              {
+                path: '**',
+                component: NotFoundComponent
+              }
+            ]
+          },]),
+    ]
 })
 export class AppModule {}

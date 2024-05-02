@@ -1,0 +1,41 @@
+@use '../../../../../styles/colors' as colors;
+
+:host {
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 64px;
+  color: colors.$white;
+  background-color: colors.$blue;
+  padding: 16px;
+
+  button[mat-button] {
+    min-width: 0;
+    margin: 0 8px 0 0;
+    padding: 0;
+
+    mat-icon {
+      margin: 0;
+      color: colors.$white;
+      width: 32px;
+      height: 32px;
+      font-size: 32px;
+    }
+  }
+
+  .title {
+    flex: 1 1 100%;
+    text-align: center;
+    font-weight: 600;
+    padding-right: 32px;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+}

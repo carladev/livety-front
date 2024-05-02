@@ -3,8 +3,8 @@
   <div (click)="editHabit.emit(habit.userHabitId)">
     <mat-card-content>
       <div mat-card-avatar class="habit-header-image"></div>
-      <mat-card-title>{{ habit.title }}</mat-card-title>
-      <mat-card-subtitle>{{ habit.frequencyId }}</mat-card-subtitle>
+      <div>{{ habit.title }}</div>
+      <div>{{ habit.frequencyId }}</div>
     </mat-card-content>
   </div>
 </mat-card>

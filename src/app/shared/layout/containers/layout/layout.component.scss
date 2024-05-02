@@ -1,0 +1,27 @@
+@use '../../../../../styles/colors' as colors;
+
+:host {
+  display: block;
+  width: 100%;
+
+  mat-sidenav-container {
+    mat-sidenav {
+      height: var(--app-100vh, 100dvh);
+      overflow: auto;
+      border: none;
+      background-color: colors.$white;
+    }
+
+    mat-sidenav-content {
+      height: var(--app-100vh, 100dvh);
+      overflow: auto;
+      background-color: colors.$app-background;
+
+      main {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 16px;
+      }
+    }
+  }
+}

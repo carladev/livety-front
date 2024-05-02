@@ -1,0 +1,35 @@
+<picture routerLink="/settings">
+  <img src="../../../../../assets/images/logo2.png" alt="Livety" />
+  <figcaption>Livety</figcaption>
+</picture>
+
+<div class="menu-items">
+  @for (menuItem of menuItems; track menuItem) {
+  <a
+    mat-button
+    class="menu-item"
+    [routerLink]="menuItem.link"
+    routerLinkActive="menu-item-active"
+    [routerLinkActiveOptions]="{ exact: false }"
+  >
+    <mat-icon class="icon" [fontIcon]="menuItem.icon"></mat-icon>
+    <div class="title">{{ menuItem.title }}</div>
+    <mat-icon class="chevron" fontIcon="chevron_right"></mat-icon>
+  </a>
+  }
+</div>
+
+<div class="separator"></div>
+
+<div class="menu-footer">
+  <button
+    mat-flat-button
+    class="app-round-button"
+    color="primary"
+    (click)="logout.emit()"
+  >
+    <mat-icon fontIcon="logout"></mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  <div class="menu-footer-version">Ver. 1.0.0</div>
+</div>

@@ -20,8 +20,9 @@ export class HabitsComponent implements OnInit {
   constructor(private habitsService: HabitsService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.getHabits().subscribe();
-
+    this.getHabits().subscribe(res => {
+      this.habits.set(res);
+    });
   }
    addDay(): void {
    
@@ -36,9 +37,11 @@ export class HabitsComponent implements OnInit {
   }
   private getHabits(): Observable<Habit[]> {
     const value = this.habitsDateFilterForm.value;
+    
     return this.habitsService.getHabits(value.habitDate || new Date()).pipe(
       tap((habits: Habit[]) => {
         this.habits.set(habits);
+      
       })
     );
   }

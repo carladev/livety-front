@@ -1,37 +1,11 @@
-<body>
-  <div class="date-container">
-    @for (date of dailyDates; track date;) {
-    <ng-container *ngIf="date.selectedDay">
-      <span>{{ date.longWeekday }}</span>
-      <span>
-        {{ date.day }} {{ date.month }} {{ date.year }}</span
-      ></ng-container
-    >
-    }
+@for (habit of habits; track habit;) {
+<mat-card class="app-card">
+  <div (click)="editHabit.emit(habit.userHabitId)">
+    <mat-card-content>
+      <div mat-card-avatar class="habit-header-image"></div>
+      <mat-card-title>{{ habit.title }}</mat-card-title>
+      <mat-card-subtitle>{{ habit.frequencyId }}</mat-card-subtitle>
+    </mat-card-content>
   </div>
-
-  <div class="dates-container">
-    @for (date of dailyDates; track date;) {
-    <button
-      mat-button
-      class="date-button"
-      [ngClass]="{ 'primary-color': date.selectedDay }"
-    >
-      <span class="weekday">{{ date.weekday }}</span
-      ><span>{{ date.day }}</span>
-    </button>
-    }
-  </div>
-
-  <div class="habits-container">
-    @for (habit of habits; track habit;) {
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="habit-header-image"></div>
-        <mat-card-title>{{ habit.title }}</mat-card-title>
-        <mat-card-subtitle>{{ habit.frequencyId }}</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-    }
-  </div>
-</body>
+</mat-card>
+}

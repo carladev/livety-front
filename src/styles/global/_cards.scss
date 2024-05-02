@@ -1,0 +1,33 @@
+@use '../../styles/colors' as colors;
+
+@mixin card() {
+  z-index: 0;
+  padding: 0;
+  border-radius: 16px;
+
+  mat-card-header {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 16px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px 16px 0 0;
+  }
+
+  mat-card-content {
+    padding: 0;
+    border-radius: 0 0 16px 16px;
+  }
+
+  mat-card-actions {
+    z-index: 1;
+    position: sticky;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: colors.$white;
+    border-bottom: 1px solid colors.$light-grey;
+    padding: 16px;
+    border-radius: 16px 16px 0 0;
+  }
+}

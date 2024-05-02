@@ -1,0 +1,28 @@
+$gt-xs-min-width: '600px';
+$gt-sm-min-width: '960px';
+$gt-md-min-width: '1280px';
+$gt-lg-min-width: '1920px';
+
+@mixin gt-xs() {
+  @media screen and (min-width: $gt-xs-min-width) {
+    @content();
+  }
+}
+
+@mixin gt-sm() {
+  @media screen and (min-width: $gt-sm-min-width) {
+    @content();
+  }
+}
+
+@mixin gt-md() {
+  @media screen and (min-width: $gt-md-min-width) {
+    @content();
+  }
+}
+
+@mixin gt-lg() {
+  @media screen and (min-width: $gt-lg-min-width) {
+    @content();
+  }
+}

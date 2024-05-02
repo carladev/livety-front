@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Habit } from '../../interfaces/habit-interface';
+import { Habit } from '../../shared/interfaces/habit-interface';
+import { format } from "date-fns";
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,14 @@ import { Habit } from '../../interfaces/habit-interface';
 export class HabitsService {
 
   constructor(private http: HttpClient) { }
-  getHabits() {
+  getHabits(habitDate: Date) {
+    let params = new HttpParams();
+    params = params.set('date', format(habitDate, 'yyyyMMdd'));
     return this.http.get<any[]>('http://localhost:8888/user-habits/all');
   }
 
   addHabit(habit: Habit) {
-    console.log(habit);
+
     return this.http.post<any>('http://localhost:8888/user-habits/add', habit);
   }
 }

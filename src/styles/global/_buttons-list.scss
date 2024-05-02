@@ -1,0 +1,61 @@
+@use '../../styles/colors' as colors;
+
+@mixin table-list() {
+  .mat-mdc-row {
+    height: auto;
+
+    .mat-mdc-cell {
+      padding: 0;
+      border: none;
+
+      .no-data {
+        padding: 16px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .app-buttons-item {
+    z-index: 0;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px 42px 16px 32px;
+    height: auto;
+    position: relative;
+    border-radius: 0;
+    border-bottom: 1px solid colors.$light-grey;
+    background-color: colors.$white;
+    text-align: left;
+
+    .app-button-item-title {
+      font-size: 16px;
+      line-height: 1.2;
+      padding: 0;
+    }
+
+    .app-button-item-subtitle {
+      font-size: 14px;
+      line-height: 1.2;
+      opacity: 0.5;
+      padding: 4px 0 0 0;
+    }
+
+    .app-button-item-chevron {
+      position: absolute;
+      right: 16px;
+      opacity: 0.25;
+      width: 32px;
+      height: 32px;
+      font-size: 32px;
+      margin: 0;
+    }
+
+    &.menu-item-active {
+      background-color: colors.$light-blue;
+    }
+  }
+}

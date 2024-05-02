@@ -1,10 +1,49 @@
-<form [formGroup]="habitForm">
-  <mat-form-field>
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="date" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</form>
+<div>
+  <div class="grid grid-row-1">
+    <div class="grid sm:grid-row-1 grid-row-4">
+      <div class="flex w-full">
+        <div class="w-96 max-sm:w-4/5">
+          <form [formGroup]="habitsDateFilterForm" class="calendar-form">
+            <mat-form-field>
+              <mat-label>Fecha</mat-label>
+              <input
+                matInput
+                formControlName="habitDate"
+                [matDatepicker]="datePicker"
+                data-cy="date"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="datePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="max-w-20 grid grid-cols-2 gap-2 sm:gap-14">
+          <button mat-icon-button aria-label="Remove" (click)="removeDay()">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Add" (click)="addDay()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="w-96 max-sm:w-4/5">
+        <mat-form-field>
+          <mat-label>Filtrar...</mat-label>
+          <input #searchInputElement matInput type="text" />
+        </mat-form-field>
+      </div>
+    </div>
 
-<app-habits-list></app-habits-list>
+    <div class="add-habit">
+      <button mat-flat-button color="primary" class="app-round-button">
+        <mat-icon fontIcon="add"></mat-icon>
+        <span>Nuevo habito</span>
+      </button>
+    </div>
+  </div>
+
+  <app-habits-list [habits]="habits()"></app-habits-list>
+</div>

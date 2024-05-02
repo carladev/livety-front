@@ -1,0 +1,109 @@
+@use 'colors' as colors;
+
+$primary-color: colors.$blue;
+$primary-contrast-color: colors.$white;
+
+$accent-color: colors.$white;
+$accent-contrast-color: colors.$blue;
+
+$warn-color: colors.$red;
+$warn-contrast-color: colors.$white;
+
+$primary: (
+  50: $primary-color,
+  100: $primary-color,
+  200: $primary-color,
+  300: $primary-color,
+  400: $primary-color,
+  500: $primary-color,
+  600: $primary-color,
+  700: $primary-color,
+  800: $primary-color,
+  900: $primary-color,
+  A100: $primary-color,
+  A200: $primary-color,
+  A400: $primary-color,
+  A700: $primary-color,
+  contrast: (
+    50: $primary-contrast-color,
+    100: $primary-contrast-color,
+    200: $primary-contrast-color,
+    300: $primary-contrast-color,
+    400: $primary-contrast-color,
+    500: $primary-contrast-color,
+    600: $primary-contrast-color,
+    700: $primary-contrast-color,
+    800: $primary-contrast-color,
+    900: $primary-contrast-color,
+    A100: $primary-contrast-color,
+    A200: $primary-contrast-color,
+    A400: $primary-contrast-color,
+    A700: $primary-contrast-color
+  )
+);
+
+$accent: (
+  50: $accent-color,
+  100: $accent-color,
+  200: $accent-color,
+  300: $accent-color,
+  400: $accent-color,
+  500: $accent-color,
+  600: $accent-color,
+  700: $accent-color,
+  800: $accent-color,
+  900: $accent-color,
+  A100: $accent-color,
+  A200: $accent-color,
+  A400: $accent-color,
+  A700: $accent-color,
+  contrast: (
+    50: $accent-contrast-color,
+    100: $accent-contrast-color,
+    200: $accent-contrast-color,
+    300: $accent-contrast-color,
+    400: $accent-contrast-color,
+    500: $accent-contrast-color,
+    600: $accent-contrast-color,
+    700: $accent-contrast-color,
+    800: $accent-contrast-color,
+    900: $accent-contrast-color,
+    A100: $accent-contrast-color,
+    A200: $accent-contrast-color,
+    A400: $accent-contrast-color,
+    A700: $accent-contrast-color
+  )
+);
+
+$warn: (
+  50: $warn-color,
+  100: $warn-color,
+  200: $warn-color,
+  300: $warn-color,
+  400: $warn-color,
+  500: $warn-color,
+  600: $warn-color,
+  700: $warn-color,
+  800: $warn-color,
+  900: $warn-color,
+  A100: $warn-color,
+  A200: $warn-color,
+  A400: $warn-color,
+  A700: $warn-color,
+  contrast: (
+    50: $warn-contrast-color,
+    100: $warn-contrast-color,
+    200: $warn-contrast-color,
+    300: $warn-contrast-color,
+    400: $warn-contrast-color,
+    500: $warn-contrast-color,
+    600: $warn-contrast-color,
+    700: $warn-contrast-color,
+    800: $warn-contrast-color,
+    900: $warn-contrast-color,
+    A100: $warn-contrast-color,
+    A200: $warn-contrast-color,
+    A400: $warn-contrast-color,
+    A700: $warn-contrast-color
+  )
+);

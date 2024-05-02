@@ -1,0 +1,158 @@
+@use '../../styles/colors' as colors;
+@use '../../styles/breakpoints' as breakpoints;
+
+@mixin dialog() {
+  $small-padding: 16px;
+  $padding: 24px;
+
+  max-width: 100vw !important;
+
+  mat-dialog-container {
+    --app-dialog-max-width: 1000px;
+
+    width: auto;
+    height: auto;
+    max-width: 100vw;
+    max-height: var(--cdty-100vh, 100vh);
+    margin: 0 auto;
+
+    .app-dialog-container {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 100vw;
+      max-width: var(--app-dialog-max-width, 1000px);
+      min-height: var(--cdty-100vh, 100vh);
+      overflow: auto;
+      overscroll-behavior-y: none;
+
+      @include breakpoints.gt-xs {
+        width: calc(100vw - ($small-padding * 2));
+        min-height: 0;
+        max-height: calc(var(--cdty-100vh, 100vh) - ($small-padding * 2));
+      }
+
+      [mat-dialog-title] {
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        height: auto !important;
+        background-color: colors.$white;
+        min-height: 64px;
+        color: colors.$white;
+        background-color: colors.$blue;
+        padding: 16px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1.2;
+
+        &::before {
+          display: none;
+        }
+
+        .app-dialog-title-close {
+          position: absolute;
+          left: 4px;
+        }
+
+        .app-dialog-title-camera {
+          position: absolute;
+          right: 4px;
+        }
+      }
+
+      [mat-dialog-content] {
+        max-height: 100% !important;
+        background-color: colors.$white;
+        padding: $small-padding $padding;
+        margin: 0;
+      }
+
+      [mat-dialog-actions] {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        width: 100%;
+        box-sizing: border-box;
+        padding: $small-padding $padding;
+        border-top: 1px solid colors.$light-grey;
+      }
+    }
+  }
+}
+
+@mixin confirm-dialog() {
+  $small-padding: 16px;
+  $padding: 24px;
+
+  max-width: 100vw !important;
+
+  mat-dialog-container {
+    --app-dialog-max-width: 1000px;
+
+    width: auto;
+    height: auto;
+    max-width: 100vw;
+    max-height: var(--cdty-100vh, 100vh);
+    margin: 0 auto;
+
+    .app-dialog-container {
+      display: block;
+      box-sizing: border-box;
+      width: calc(100vw - ($small-padding * 2));
+      max-width: var(--app-dialog-max-width, 1000px);
+      height: auto;
+      max-height: calc(var(--cdty-100vh, 100vh) - ($small-padding * 2));
+      overflow: auto;
+      overscroll-behavior-y: none;
+
+      [mat-dialog-title] {
+        z-index: 10;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: $small-padding $padding;
+        height: auto !important;
+        background-color: colors.$white;
+
+        &::before {
+          display: none;
+        }
+      }
+
+      [mat-dialog-content] {
+        border-top: 1px solid colors.$light-grey;
+        max-height: 100% !important;
+        background-color: colors.$white;
+        padding: $small-padding $padding;
+        margin: 0;
+      }
+
+      [mat-dialog-actions] {
+        z-index: 10;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: colors.$white;
+        padding: $small-padding $padding;
+        border-top: 1px solid colors.$light-grey;
+      }
+    }
+  }
+}

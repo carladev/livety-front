@@ -1,0 +1,10 @@
+@use '../../styles/colors' as colors;
+
+@mixin round-button() {
+  border-radius: 32px;
+  padding: 0 16px;
+
+  &.mat-primary {
+    --mdc-filled-button-label-text-color: #{colors.$white};
+  }
+}

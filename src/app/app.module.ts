@@ -23,6 +23,10 @@ import { LayoutComponent } from './shared/layout/containers/layout/layout.compon
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NotFoundComponent } from './not-found/containers/not-found.component';
 import {  RouterModule } from '@angular/router';
+import { LoginComponent } from './login/containers/login/login.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
     declarations: [
@@ -30,9 +34,10 @@ import {  RouterModule } from '@angular/router';
         HabitsComponent,
         HabitsListComponent,
         LayoutComponent,
+        LoginComponent,
         MenuComponent,
         NotFoundComponent,
-        ToolbarComponent     
+        ToolbarComponent 
     ],
 
     providers: [
@@ -55,10 +60,14 @@ import {  RouterModule } from '@angular/router';
         MatInputModule,
         MatSlideToggleModule,
         MatSidenavModule,
+        MatProgressSpinnerModule,
         MatTableModule,
         MatToolbarModule,
+        MatTabsModule,
+        MatProgressBarModule,
         ReactiveFormsModule,
         RouterModule,
+
         RouterModule.forRoot([
           {
             path: '',
@@ -67,13 +76,17 @@ import {  RouterModule } from '@angular/router';
               {
                 path: 'habits',
                 component: HabitsComponent
-              },
-              {
-                path: '**',
-                component: NotFoundComponent
               }
             ]
-          },]),
-    ]
+          },
+          {
+            path: 'login',
+            component: LoginComponent
+          },
+          {
+            path: '**',
+            component: NotFoundComponent
+          }
+        ]),]
 })
 export class AppModule {}

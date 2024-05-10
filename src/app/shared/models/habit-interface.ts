@@ -1,20 +1,20 @@
 export interface Habit {
-  userHabitId?: number;
   habitId: number;
   habitName: string;
-  userId: number;
-  frequencyId: string;
-  title: string;
-  color:string;
+  color: string;
   icon: string;
-  }
+  frequencyId: string;
+  weekDays: WeekDay[];
+  habitGoal: number;
+  habitGoalUnit: string;
+}
 
-export interface DailyDate {
-  date: Date;
-  weekday: string;
-  longWeekday: string;
-  day: number;
-  month: string;
-  year:string;
-  selectedDay: boolean;
-  }
+export interface Frenquency {
+  frequencyId: number;
+  frequencyName: string;
+}
+
+export interface WeekDay {
+  weekdayId: string;
+  weekdayName?: string;
+}

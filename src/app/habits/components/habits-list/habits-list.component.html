@@ -1,9 +1,9 @@
 @for (habit of habits; track habit;) {
 <mat-card class="app-card">
-  <div (click)="editHabit.emit(habit.userHabitId)">
+  <div (click)="editHabit.emit(habit.habitId)">
     <mat-card-content>
       <div mat-card-avatar class="habit-header-image"></div>
-      <div>{{ habit.title }}</div>
+      <div>{{ habit.habitName }}</div>
       <div>{{ habit.frequencyId }}</div>
     </mat-card-content>
   </div>

@@ -1,0 +1,129 @@
+<form [formGroup]="form">
+  <mat-card class="app-card">
+    <mat-card-content>
+      <div class="col-auto content-center">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="habitName" />
+          </mat-form-field>
+        </div>
+        <div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Color</mat-label>
+              <input
+                type="color"
+                matInput
+                formControlName="color"
+                list="colorList"
+              />
+              <datalist id="colorList">
+                <option *ngFor="let color of colors" [value]="color">
+                  {{ color }}
+                </option>
+              </datalist>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Icon</mat-label>
+              <input
+                matInput
+                formControlName="icon"
+                (click)="emojiPickerVisible = !emojiPickerVisible"
+                readonly
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="emojiPickerVisible" class="emoji-picker">
+          <emoji-mart
+            (emojiSelect)="onEmojiSelect($event)"
+            emoji="smile"
+            [showPreview]="false"
+            [darkMode]="false"
+            color="#6FAAFC"
+          ></emoji-mart>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Frecuencia</mat-label>
+            <mat-select formControlName="frequencyId">
+              @for (frequency of frequencies(); track frequency) {
+              <mat-option [value]="frequency?.frequencyId"
+                >{{ frequency?.frequencyName }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- <div *ngIf="form.get('frequencyId')?.value === 'D'">
+          <mat-label>Días de la semana</mat-label>
+          <div formControlName="weekDaysSelected">
+            @for (weekDay of weekDays(); track weekDay) {
+            <button
+              mat-flat-button
+              color="primary"
+              class="weekday-button"
+              type="button"
+            >
+              <span>{{ weekDay?.weekdayId }}</span>
+            </button>
+            }
+          </div>
+        </div> -->
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Objetivo</mat-label>
+            <input
+              matInput
+              formControlName="habitGoal"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad</mat-label>
+            <input matInput formControlName="habitGoalUnit" type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<footer>
+  <div class="flex justify-end space-x-4 sm:mb-0">
+    @if (habitId) {
+    <button
+      mat-flat-button
+      color="warn"
+      class="app-round-button"
+      type="button"
+      (click)="deleteHabit(habitId)"
+    >
+      Borrar
+    </button>
+    }
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="app-round-button"
+      type="button"
+      (click)="saveHabit()"
+      [disabled]="form.invalid"
+    >
+      <span>Guardar</span>
+      <mat-icon fontIcon="save"></mat-icon>
+    </button>
+  </div>
+</footer>

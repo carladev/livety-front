@@ -1,10 +1,37 @@
-@for (habit of habits; track habit;) {
-<mat-card class="app-card">
+@for (habit of habits; track habit) {
+<mat-card class="app-card" [ngStyle]="{ 'background-color': habit.color }">
   <div (click)="editHabit.emit(habit.habitId)">
-    <mat-card-content>
-      <div mat-card-avatar class="habit-header-image"></div>
-      <div>{{ habit.habitName }}</div>
-      <div>{{ habit.frequencyId }}</div>
+    <mat-card-content class="app-card-content">
+      <div class="grid grid-cols-3 items-center">
+        <div class="habit-icon-container col-span-1">
+          <span class="habit-icon">{{ habit.icon }}</span>
+        </div>
+        <div class="col-span-1 justify-start">
+          <div>
+            <span class="habit-tittle"
+              ><b>{{ habit.habitName }}</b></span
+            >
+          </div>
+          <div>{{ habit.habitGoal }} / {{ habit.habitGoalUnit }}</div>
+        </div>
+        <div class="flex justify-center col-span-1">
+          <button
+            mat-icon-button
+            (click)="deleteHabit.emit(habit.habitId)"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            (click)="deleteHabit.emit(habit.habitId)"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-card-content>
   </div>
 </mat-card>

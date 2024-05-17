@@ -40,7 +40,7 @@ export class HabitsService {
 
   createHabit(habit: Habit): Observable<void> {
     console.log(habit);
-    return this.http.post<void>(`${this.habitAPI}`, { habit });
+    return this.http.post<void>(`${this.habitAPI}`, { ...habit });
   }
 
   deleteHabit(habitId: number): Observable<void> {

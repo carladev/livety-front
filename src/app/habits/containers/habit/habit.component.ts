@@ -62,7 +62,7 @@ export class HabitComponent implements OnInit {
       color: [habit?.color ?? '#6FAAFC', [Validators.required]],
       icon: [habit?.icon ?? '😊', [Validators.required]],
       frequencyId: [habit?.frequencyId ?? null, [Validators.required]],
-      weekDaysSelected: [habit?.weekDays ?? null],
+      weekDays: [habit?.weekDays ?? this.weekDays()],
       habitGoal: [habit?.habitGoal ?? 1, [Validators.required]],
       habitGoalUnit: [habit?.habitGoalUnit ?? 'veces'],
     });
@@ -103,8 +103,14 @@ export class HabitComponent implements OnInit {
     this.emojiPickerVisible = false;
   }
 
+  toggleWeekDaySelection(weekDay: WeekDay): void {
+    weekDay.selected = !weekDay.selected;
+    this.weekDays.set(this.weekDays());
+    this.form.get('weekDays')?.setValue(this.weekDays());
+  }
+
   saveHabit(): void {
-    console.log(this.form.value);
+    console.log('eee', this.form.value);
     if (this.form.valid) {
       this.loading.open();
       if (this.habit?.habitId) {

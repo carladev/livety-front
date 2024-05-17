@@ -19,7 +19,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppComponent } from './app.component';
 import { HabitsListComponent } from './habits/components/habits-list/habits-list.component';
 import { HabitsComponent } from './habits/containers/habits/habits.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 import { MenuComponent } from './shared/layout/components/menu/menu.component';
 import { ToolbarComponent } from './shared/layout/components/toolbar/toolbar.component';
 import { LayoutComponent } from './shared/layout/containers/layout/layout.component';
@@ -30,7 +34,6 @@ import { LoginComponent } from './login/containers/login/login.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { HabitComponent } from './habits/containers/habit/habit.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
@@ -38,12 +41,13 @@ import { LoadingComponent } from './shared/loading/containers/loading/loading.co
 import { LoadingDialogComponent } from './shared/loading/containers/loading-dialog/loading-dialog.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/containers/confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { HabitComponent } from './habits/containers/habit/habit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HabitsComponent,
     HabitComponent,
+    HabitsComponent,
     HabitsListComponent,
     LayoutComponent,
     LoginComponent,
@@ -59,6 +63,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     provideNativeDateAdapter(),
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent],
   imports: [

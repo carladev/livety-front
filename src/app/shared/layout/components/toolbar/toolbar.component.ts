@@ -8,17 +8,16 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
   @Input() isHandset?: boolean | null;
@@ -27,7 +26,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   title = '';
   navigateBackButton = false;
-  mutationObserver?: MutationObserver;
   routerSubscription?: Subscription;
 
   constructor(
@@ -41,21 +39,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     this.title = titleElement?.innerText ?? '';
 
-    if (titleElement) {
-      this.mutationObserver = new MutationObserver(mutations => {
-        this.title = mutations?.[0].target.textContent ?? '';
-        this.cdr.markForCheck();
-      });
-
-      this.mutationObserver.observe(titleElement, {
-        subtree: true,
-        characterData: true,
-        childList: true
-      });
-    }
-
     this.routerSubscription = this.router.events.subscribe({
-      next: event => {
+      next: (event) => {
         if (event instanceof NavigationEnd) {
           this.navigateBackButton = this.getDataBackButton();
           this.cdr.markForCheck();
@@ -64,7 +49,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       error: () => {
         this.navigateBackButton = false;
         this.cdr.markForCheck();
-      }
+      },
     });
 
     this.navigateBackButton = this.getDataBackButton();
@@ -73,7 +58,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSubscription?.unsubscribe();
-    this.mutationObserver?.disconnect();
   }
 
   private getDataBackButton(): boolean {

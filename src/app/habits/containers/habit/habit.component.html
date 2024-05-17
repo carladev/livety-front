@@ -19,9 +19,11 @@
                 list="colorList"
               />
               <datalist id="colorList">
-                <option *ngFor="let color of colors" [value]="color">
+                @for (color of colors; track color) {
+                <option [value]="color">
                   {{ color }}
                 </option>
+                }
               </datalist>
             </mat-form-field>
           </div>
@@ -61,21 +63,22 @@
           </mat-form-field>
         </div>
 
-        <!-- <div *ngIf="form.get('frequencyId')?.value === 'D'">
+        <div *ngIf="form.get('frequencyId')?.value === 'D'" class="week-days">
           <mat-label>Días de la semana</mat-label>
-          <div formControlName="weekDaysSelected">
+          <div formControlName="weekDays">
             @for (weekDay of weekDays(); track weekDay) {
             <button
               mat-flat-button
-              color="primary"
+              [color]="weekDay.selected ? 'primary' : 'basic'"
               class="weekday-button"
               type="button"
+              (click)="toggleWeekDaySelection(weekDay)"
             >
               <span>{{ weekDay?.weekdayId }}</span>
             </button>
             }
           </div>
-        </div> -->
+        </div>
 
         <div>
           <mat-form-field appearance="outline">

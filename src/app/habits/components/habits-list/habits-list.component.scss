@@ -1,164 +1,28 @@
-@use '../../../../styles/colors' as colors;
-@use '../../../../styles/breakpoints' as breakpoints;
-
-mat-form-field {
-  width: 100%;
-}
+@use "../../../../styles/colors" as colors;
 
 .app-card {
   margin-bottom: 12px;
   cursor: pointer;
 }
 
-.detail-lines {
-  padding: 0 0 8px 16px;
-
-  .detail-header {
-    font-size: 16px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-
-    .header-customer {
-      padding: 10px 0px;
-    }
-
-    .date-habit {
-      padding: 12px 0 12px 12px;
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.5);
-    }
-
-    .state-habit {
-      border-radius: 50%;
-      font-size: 10px;
-      display: flex;
-      justify-content: center;
-      padding: 6px;
-      margin-top: 6px;
-      margin-right: -16px;
-
-      @include breakpoints.gt-sm {
-        border-radius: 8px;
-      }
-
-      span {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: colors.$white;
-
-        @include breakpoints.gt-sm {
-          padding-right: 4px;
-        }
-        mat-icon {
-          width: 24px;
-          height: 20px;
-          font-size: 22px;
-          margin-top: 2px;
-
-          @include breakpoints.gt-sm {
-            width: 26px;
-            margin-top: 0;
-          }
-        }
-
-        span {
-          margin-left: 4px;
-          margin-bottom: 2px;
-        }
-      }
-    }
-
-    .trigger-menu {
-      color: colors.$light-blue;
-      margin-top: -4px;
-      @include breakpoints.gt-sm {
-        margin-top: -6px;
-      }
-    }
-
-    .mat-icon-menu {
-      background-color: colors.$blue;
-      color: colors.$white;
-      border-radius: 6px;
-    }
-  }
+.app-card-content {
+  padding: 0 !important;
 }
 
-.header-container {
-  padding: 0 32px;
-  color: grey;
-  font-size: 14px;
-}
-
-.info-container {
-  padding: 0 32px 12px 32px;
+.habit-tittle {
   font-size: 16px;
 }
-
-.header-destination {
-  padding: 0px 24px 12px;
-
-  span {
-    mat-icon {
-      width: 18px;
-      height: 18px;
-      font-size: 18px;
-    }
-  }
+.habit-icon-container {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-mat-expansion-panel {
-  border-radius: 0 0 12px 12px;
-
-  .separate-line:not(:last-child) {
-    border-bottom: 1px solid #ccc;
-  }
-}
-
-mat-expansion-panel-header {
-  margin: 20px;
-  height: 40px;
-  background-color: colors.$blue;
-  border-radius: 12px;
-
-  &:hover {
-    background-color: colors.$blue !important;
-  }
-
-  &.mat-expanded {
-    background-color: colors.$blue !important;
-    height: 40px;
-  }
-
-  mat-panel-title {
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.detail {
-  padding: 12px 12px 12px 0px;
-
-  .title {
-    font-size: 14px;
-    color: grey;
-  }
-
-  .sub-title {
-    font-size: 16px;
-    color: colors.$black;
-  }
-}
-
-.no-data {
-  padding: 12px;
-}
-
-.habit-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
+.habit-icon {
+  font-size: 36px;
 }

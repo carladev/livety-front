@@ -4,7 +4,7 @@
     [(opened)]="opened"
     [mode]="isHandset ? 'over' : 'side'"
   >
-    <app-menu [isHandset]="isHandset"></app-menu>
+    <app-menu [isHandset]="isHandset" (logout)="onLogout()"></app-menu>
   </mat-sidenav>
 
   <mat-sidenav-content>

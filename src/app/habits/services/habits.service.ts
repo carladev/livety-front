@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HabitsService {
-  private readonly habitsAPI = 'http://localhost:8888/habits';
-  private readonly habitAPI = 'http://localhost:8888/habit';
-  private readonly habitRecordAPI = 'http://localhost:8888/habit-record';
+  private readonly habitsAPI = '/api/habits';
+  private readonly habitAPI = '/api/habit';
+  private readonly habitRecordAPI = '/api/habit-record';
 
   constructor(private http: HttpClient) {}
   getHabits(habitDate: Date) {

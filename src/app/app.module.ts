@@ -10,16 +10,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {
-  BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppComponent } from './app.component';
 import { HabitsListComponent } from './habits/components/habits-list/habits-list.component';
 import { HabitsComponent } from './habits/containers/habits/habits.component';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
@@ -42,6 +40,8 @@ import { LoadingDialogComponent } from './shared/loading/containers/loading-dial
 import { ConfirmDialogComponent } from './shared/confirm-dialog/containers/confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HabitComponent } from './habits/containers/habit/habit.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptors';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -61,12 +61,13 @@ import { HabitComponent } from './habits/containers/habit/habit.component';
 
   providers: [
     provideNativeDateAdapter(),
-    provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   imports: [
+    AppRoutingModule,
     PickerComponent,
     BrowserAnimationsModule,
     BrowserModule,
@@ -91,31 +92,6 @@ import { HabitComponent } from './habits/containers/habit/habit.component';
     ReactiveFormsModule,
     RouterModule,
     MatDialogModule,
-
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: LayoutComponent,
-        children: [
-          {
-            path: 'habits',
-            component: HabitsComponent,
-          },
-          {
-            path: 'new-habit',
-            component: HabitComponent,
-          },
-        ],
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: '**',
-        component: NotFoundComponent,
-      },
-    ]),
   ],
 })
 export class AppModule {}

@@ -2,19 +2,22 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <picture>
       <img src="assets/images/logo_login.png" alt="Livety" />
-     
     </picture>
- 
+
     <h2>Log in</h2>
 
     <mat-form-field appearance="outline">
       <mat-label>User</mat-label>
-      <input matInput type="text" formControlName="username" />
+      <input matInput type="text" formControlName="userName" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" />
+      <input
+        matInput
+        formControlName="password"
+        [type]="hidePassword ? 'password' : 'text'"
+      />
       <button
         mat-icon-button
         matSuffix
@@ -23,23 +26,31 @@
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hidePassword"
       >
-        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
       </button>
     </mat-form-field>
 
     @if (showError()) {
-      <div class="error">Incorrect username or password</div>
+    <div class="error">Incorrect userName or password</div>
     }
 
-    <button mat-flat-button class="app-round-button" type="submit" color="primary" [disabled]="form.invalid">
+    <button
+      mat-flat-button
+      class="app-round-button"
+      type="submit"
+      color="primary"
+      [disabled]="form.invalid"
+    >
       Log in
     </button>
   </form>
 
   @if (loading()) {
-    <div class="loading">
-      <mat-spinner></mat-spinner>
-    </div>
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
   }
   <p class="sing-up">
     Don't have an Account?

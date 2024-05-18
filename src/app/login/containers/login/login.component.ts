@@ -1,38 +1,64 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SessionService } from '../../services/session.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   loading = signal(false);
   showError = signal(false);
   hidePassword = true;
-  form = new FormGroup({
-    username: new FormControl<string>('', { nonNullable: true }),
-    password: new FormControl<string>('', { nonNullable: true })
-  });
+  form: FormGroup;
 
-   private sessionService = inject(SessionService);
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      userName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
 
   onSubmit(): void {
+    if (this.form.invalid) {
+      this.showError.set(true);
+      return;
+    }
+
     this.loading.set(true);
     this.showError.set(false);
 
-    this.sessionService.login(this.form.value.username || '', this.form.value.password || '').subscribe({
-      error: () => {
+    const { userName, password } = this.form.value;
+
+    this.authService.login(userName, password).subscribe({
+      next: (response) => {
+        console.log('Logged in successfully');
         this.loading.set(false);
+        this.router.navigateByUrl(`/habits`);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
         this.showError.set(true);
-      }
+        this.loading.set(false);
+      },
     });
   }
 }

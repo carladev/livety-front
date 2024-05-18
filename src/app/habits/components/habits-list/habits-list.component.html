@@ -1,7 +1,13 @@
 @for (habit of habits; track habit) {
-<mat-card class="app-card" [ngStyle]="{ 'background-color': habit.color }">
+
+<mat-card class="app-card">
   <div (click)="editHabit.emit(habit.habitId)">
     <mat-card-content class="app-card-content">
+      <mat-progress-bar
+        mode="determinate"
+        [ngStyle]="{ 'background-color': habit.color }"
+        [value]="(habit.record / habit.habitGoal) * 100"
+      ></mat-progress-bar>
       <div class="grid grid-cols-3 items-center">
         <div class="habit-icon-container col-span-1">
           <span class="habit-icon">{{ habit.icon }}</span>
@@ -12,12 +18,15 @@
               ><b>{{ habit.habitName }}</b></span
             >
           </div>
-          <div>{{ habit.habitGoal }} / {{ habit.habitGoalUnit }}</div>
+          <div>
+            {{ habit.record ? habit.record : 0 }}/{{ habit.habitGoal }}
+            {{ habit.habitGoalUnit }}
+          </div>
         </div>
         <div class="flex justify-center col-span-1">
           <button
             mat-icon-button
-            (click)="deleteHabit.emit(habit.habitId)"
+            (click)="addHabitRecord.emit(habit)"
             (click)="$event.stopPropagation()"
           >
             <mat-icon>add</mat-icon>
@@ -25,7 +34,7 @@
 
           <button
             mat-icon-button
-            (click)="deleteHabit.emit(habit.habitId)"
+            (click)="completeHabitRecord.emit(habit)"
             (click)="$event.stopPropagation()"
           >
             <mat-icon>check</mat-icon>

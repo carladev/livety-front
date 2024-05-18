@@ -38,12 +38,22 @@
     </div>
 
     <div class="add-habit">
-      <button mat-flat-button color="primary" class="app-round-button">
+      <button
+        mat-flat-button
+        color="primary"
+        class="app-round-button"
+        (click)="newHabit()"
+      >
         <mat-icon fontIcon="add"></mat-icon>
         <span>Nuevo habito</span>
       </button>
     </div>
   </div>
 
-  <app-habits-list [habits]="habits()"></app-habits-list>
+  <app-habits-list
+    [habits]="habits()"
+    (editHabit)="editHabit($event)"
+    (addHabitRecord)="addHabitRecord($event)"
+    (completeHabitRecord)="completeHabitRecord($event)"
+  ></app-habits-list>
 </div>

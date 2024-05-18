@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 export class HabitsService {
   private readonly habitsAPI = 'http://localhost:8888/habits';
   private readonly habitAPI = 'http://localhost:8888/habit';
+  private readonly habitRecordAPI = 'http://localhost:8888/habit-record';
+
   constructor(private http: HttpClient) {}
   getHabits(habitDate: Date) {
     let params = new HttpParams();
@@ -46,4 +48,8 @@ export class HabitsService {
   deleteHabit(habitId: number): Observable<void> {
     return this.http.post<void>(`${this.habitAPI}/delelte/${habitId}`, {});
   }
+
+  // addHabitRecord(habitId: number, record): Observable<void> {
+  //   return this.http.post<void>(`${this.habitRecordAPI}/${habitId}`, {});
+  // }
 }

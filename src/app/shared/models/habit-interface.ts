@@ -7,6 +7,7 @@ export interface Habit {
   weekDays: WeekDay[];
   habitGoal: number;
   habitGoalUnit: string;
+  record: number;
 }
 
 export interface Frenquency {

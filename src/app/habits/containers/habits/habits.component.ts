@@ -5,6 +5,7 @@ import { Observable, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { addDays, subDays } from 'date-fns';
 import { Habit } from '../../../shared/models/habit-interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-habits',
   templateUrl: './habits.component.html',
@@ -15,7 +16,11 @@ export class HabitsComponent implements OnInit {
   habitsDateFilterForm = this.generateForm();
   private destroyRef = inject(DestroyRef);
 
-  constructor(private habitsService: HabitsService, private fb: FormBuilder) {}
+  constructor(
+    private habitsService: HabitsService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getHabits().subscribe((res) => {
@@ -61,5 +66,23 @@ export class HabitsComponent implements OnInit {
       .subscribe();
 
     return form;
+  }
+
+  newHabit(): void {
+    this.router.navigateByUrl(`/new-habit`);
+  }
+
+  editHabit(habitId: number): void {
+    this.router.navigateByUrl(`/habit/${habitId}`);
+  }
+
+  addHabitRecord(habit: Habit): void {
+    console.log('addHabitRecord', habit.habitId, habit.record);
+    console.log('addHabitRecord --->', habit.record + 1);
+  }
+
+  completeHabitRecord(habit: Habit): void {
+    console.log('completeHabitRecord', habit.habitId, habit.record);
+    console.log('completeHabitRecord --->', habit.habitGoal);
   }
 }

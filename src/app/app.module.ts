@@ -42,7 +42,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HabitComponent } from './habits/containers/habit/habit.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptors';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './register/containers/register/register.component';
+import { RegisterComponent } from './login/containers/register/register.component';
+import { StartComponent } from './login/containers/start/start.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { RegisterComponent } from './register/containers/register/register.compo
     LoadingComponent,
     LoadingDialogComponent,
     ConfirmDialogComponent,
+    StartComponent,
   ],
 
   providers: [

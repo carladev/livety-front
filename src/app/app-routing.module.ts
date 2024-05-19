@@ -5,6 +5,8 @@ import { HabitsComponent } from './habits/containers/habits/habits.component';
 import { HabitComponent } from './habits/containers/habit/habit.component';
 import { LoginComponent } from './login/containers/login/login.component';
 import { NotFoundComponent } from './not-found/containers/not-found.component';
+import { RegisterComponent } from './login/containers/register/register.component';
+import { StartComponent } from './login/containers/start/start.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,16 @@ const routes: Routes = [
     title: 'Iniciar sesión',
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    title: 'Register',
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    title: 'Start',
+    path: 'start',
+    component: StartComponent,
   },
   {
     path: '',

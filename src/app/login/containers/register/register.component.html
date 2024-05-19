@@ -4,11 +4,16 @@
       <img src="assets/images/logo_login.png" alt="Livety" />
     </picture>
 
-    <h2>Log in</h2>
+    <h2>Register</h2>
 
     <mat-form-field appearance="outline">
       <mat-label>User</mat-label>
       <input matInput type="text" formControlName="userName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -32,9 +37,32 @@
       </button>
     </mat-form-field>
 
-    @if (showError()) {
-    <div class="error">Incorrect userName or password</div>
-    }
+    <mat-form-field appearance="outline">
+      <mat-label>Repeat Password</mat-label>
+      <input
+        matInput
+        formControlName="repeatPassword"
+        [type]="hidePassword ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div *ngIf="form.hasError('passwordsMismatch')" class="error">
+      Passwords must match.
+    </div>
+
+    <div *ngIf="showError()" class="error">Incorrect userName or password</div>
 
     <button
       mat-flat-button
@@ -43,17 +71,15 @@
       color="primary"
       [disabled]="form.invalid"
     >
-      Log in
+      Register
     </button>
   </form>
 
-  @if (loading()) {
-  <div class="loading">
+  <div *ngIf="loading()" class="loading">
     <mat-spinner></mat-spinner>
   </div>
-  }
   <p class="sing-up">
-    Don't have an Account?
-    <a [routerLink]="['/register']" target="_self">Sign up</a>
+    ¿Ya tienes una cuenta?
+    <a [routerLink]="['/login']" target="_self">Login</a>
   </p>
 </main>

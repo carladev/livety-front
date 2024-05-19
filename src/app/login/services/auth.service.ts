@@ -7,7 +7,8 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private authUrl = '/api/login';
+  private loginAPI = '/api/login';
+  private registerAPI = '/api/register';
   private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
   >(null);
@@ -21,7 +22,7 @@ export class AuthService {
   }
 
   login(userName: string, password: string): Observable<any> {
-    return this.http.post<any>(this.authUrl, { userName, password }).pipe(
+    return this.http.post<any>(this.loginAPI, { userName, password }).pipe(
       tap((response) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
@@ -29,6 +30,16 @@ export class AuthService {
         }
       })
     );
+  }
+
+  register(userName: string, email: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(this.registerAPI, { userName, email, password })
+      .pipe(
+        tap(() => {
+          this.login(userName, password);
+        })
+      );
   }
 
   logout(): void {

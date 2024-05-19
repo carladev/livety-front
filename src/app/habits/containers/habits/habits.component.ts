@@ -26,6 +26,10 @@ export class HabitsComponent implements OnInit {
 
   ngOnInit() {
     this.getHabits().subscribe((res) => {
+      if (!res.length) {
+        console.log('no habits');
+        this.router.navigate(['/start']);
+      }
       this.habits.set(res);
     });
   }

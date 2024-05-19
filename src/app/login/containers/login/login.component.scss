@@ -1,4 +1,4 @@
-@use '../../../../styles/colors' as colors;
+@use "../../../../styles/colors" as colors;
 
 :host {
   display: flex;
@@ -9,8 +9,8 @@
   min-height: var(--app-100vh, 100vh);
   width: 100%;
   padding: 16px;
-  background:radial-gradient(#67A6FD 35%, white 100%);
-  
+  background: radial-gradient(#67a6fd 35%, white 100%);
+
   main {
     text-align: center;
     position: relative;
@@ -19,12 +19,11 @@
     max-width: 500px;
     height: auto;
     background-color: white;
-    padding:42px;
+    padding: 42px;
     border-radius: 16px;
     overflow: hidden;
-   
 
-    h2{
+    h2 {
       font-family: Poppins, sans-serif;
       color: colors.$blue;
     }
@@ -35,7 +34,6 @@
       max-width: 250px;
       height: auto;
       margin: 0 auto 16px auto;
-
 
       img {
         display: block;
@@ -78,8 +76,8 @@
     color: colors.$blue;
 
     a {
-        text-decoration: none;
-        font-weight: 700;
+      text-decoration: none;
+      font-weight: 700;
     }
-}
+  }
 }

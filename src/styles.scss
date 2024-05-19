@@ -1,18 +1,18 @@
-@use 'styles/colors' as colors;
-@use 'styles/breakpoints' as breakpoints;
-@use 'styles/material-palettes' as material-palettes;
-@use 'styles/global/buttons-list' as global-buttons-list;
-@use 'styles/global/buttons' as global-buttons;
-@use 'styles/global/cards' as global-cards;
-@use 'styles/global/dialogs' as global-dialogs;
-@use 'styles/global/snack-bars' as global-snack-bars;
-@use 'styles/global/form' as global-form;
+@use "styles/colors" as colors;
+@use "styles/breakpoints" as breakpoints;
+@use "styles/material-palettes" as material-palettes;
+@use "styles/global/buttons-list" as global-buttons-list;
+@use "styles/global/buttons" as global-buttons;
+@use "styles/global/cards" as global-cards;
+@use "styles/global/dialogs" as global-dialogs;
+@use "styles/global/snack-bars" as global-snack-bars;
+@use "styles/global/form" as global-form;
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "@ctrl/ngx-emoji-mart/picker";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -35,8 +35,8 @@ $app-theme: mat.define-light-theme(
     color: (
       primary: $app-primary,
       accent: $app-accent,
-      warn: $app-warn
-    )
+      warn: $app-warn,
+    ),
   )
 );
 
@@ -47,7 +47,7 @@ $app-theme: mat.define-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -58,9 +58,6 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-// Para parchear un error de Tailwind con MatFormField (https://github.com/tailwindlabs/tailwindcss/discussions/9993)
-// Habría que volver a validad esto en unos meses para ver si sigue igual en futuras versiones
 
 .mdc-notched-outline__notch {
   border-right: none !important;

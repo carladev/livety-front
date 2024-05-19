@@ -9,23 +9,37 @@ import { NotFoundComponent } from './not-found/containers/not-found.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    title: 'Iniciar sesión',
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: '',
     component: LayoutComponent,
     children: [
       {
+        title: 'Habitos',
         path: 'habits',
         component: HabitsComponent,
       },
       {
+        title: 'Nuevo habito',
         path: 'new-habit',
+        component: HabitComponent,
+      },
+      {
+        title: 'Editar habito',
+        path: 'edit-habit/:habitId',
         component: HabitComponent,
       },
     ],
   },
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
+    title: 'Pagina no encontrada',
     path: '**',
     component: NotFoundComponent,
   },

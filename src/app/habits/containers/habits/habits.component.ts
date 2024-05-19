@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { addDays, subDays } from 'date-fns';
 import { Habit } from '../../../shared/models/habit-interface';
 import { Router } from '@angular/router';
+import { SnackBarService } from '../../../shared/snack-bar/services/snack-bar.service';
 @Component({
   selector: 'app-habits',
   templateUrl: './habits.component.html',
@@ -19,7 +20,8 @@ export class HabitsComponent implements OnInit {
   constructor(
     private habitsService: HabitsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit() {
@@ -73,16 +75,50 @@ export class HabitsComponent implements OnInit {
   }
 
   editHabit(habitId: number): void {
-    this.router.navigateByUrl(`/habit/${habitId}`);
+    this.router.navigateByUrl(`/edit-habit/${habitId}`);
   }
 
   addHabitRecord(habit: Habit): void {
-    console.log('addHabitRecord', habit.habitId, habit.record);
-    console.log('addHabitRecord --->', habit.record + 1);
+    this.habitsService
+      .addHabitRecord(
+        habit.habitId,
+        habit.record + 1,
+        this.habitsDateFilterForm.get('habitDate')?.value || new Date()
+      )
+      .subscribe({
+        next: () => {
+          this.getHabits().subscribe((res) => {
+            this.habits.set(res);
+          });
+          this.snackBarService.openSuccess('Registro de habito actualizada');
+        },
+        error: () => {
+          this.snackBarService.openError(
+            'Error al actualizar el registro del habito'
+          );
+        },
+      });
   }
 
   completeHabitRecord(habit: Habit): void {
-    console.log('completeHabitRecord', habit.habitId, habit.record);
-    console.log('completeHabitRecord --->', habit.habitGoal);
+    this.habitsService
+      .addHabitRecord(
+        habit.habitId,
+        habit.habitGoal,
+        this.habitsDateFilterForm.get('habitDate')?.value || new Date()
+      )
+      .subscribe({
+        next: () => {
+          this.getHabits().subscribe((res) => {
+            this.habits.set(res);
+          });
+          this.snackBarService.openSuccess('Registro de habito actualizada');
+        },
+        error: () => {
+          this.snackBarService.openError(
+            'Error al actualizar el registro del habito'
+          );
+        },
+      });
   }
 }

@@ -10,13 +10,12 @@ import { Observable } from 'rxjs';
 export class HabitsService {
   private readonly habitsAPI = '/api/habits';
   private readonly habitAPI = '/api/habit';
-  private readonly habitRecordAPI = '/api/habit-record';
 
   constructor(private http: HttpClient) {}
   getHabits(habitDate: Date) {
     let params = new HttpParams();
-    params = params.set('date', format(habitDate, 'yyyyMMdd'));
-    return this.http.get<any[]>(`${this.habitsAPI}`);
+    params = params.set('date', format(habitDate, 'yyyy-MM-dd'));
+    return this.http.get<any[]>(`${this.habitsAPI}`, { params });
   }
 
   getFrequencies() {
@@ -31,7 +30,7 @@ export class HabitsService {
   }
 
   getHabit(habitId: number) {
-    return this.http.get<Habit>(`${this.habitsAPI}/${habitId}`);
+    return this.http.get<Habit>(`${this.habitAPI}/${habitId}`);
   }
 
   updateHabit(habitId: number, habit: Habit): Observable<void> {
@@ -49,7 +48,17 @@ export class HabitsService {
     return this.http.post<void>(`${this.habitAPI}/delelte/${habitId}`, {});
   }
 
-  // addHabitRecord(habitId: number, record): Observable<void> {
-  //   return this.http.post<void>(`${this.habitRecordAPI}/${habitId}`, {});
-  // }
+  addHabitRecord(
+    habitId: number,
+    record: number,
+    date: Date
+  ): Observable<void> {
+    const recordDate = format(date, 'yyyy-MM-dd');
+
+    return this.http.post<void>(`${this.habitAPI}/record`, {
+      habitId,
+      record,
+      recordDate,
+    });
+  }
 }

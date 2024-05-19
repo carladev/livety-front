@@ -16,7 +16,7 @@ import {
 } from '../../../shared/models/habit-interface';
 import { SnackBarService } from '../../../shared/snack-bar/services/snack-bar.service';
 import { HabitsService } from '../../services/habits.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-habit',
   templateUrl: './habit.component.html',
@@ -38,7 +38,8 @@ export class HabitComponent implements OnInit {
     private loading: LoadingService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -49,11 +50,20 @@ export class HabitComponent implements OnInit {
     this.habitId = Number(this.activatedRoute.snapshot.params?.['habitId']);
     if (this.habitId) {
       this.getData(this.habitId);
-      this.form = this.generateForm(this.habit);
     } else {
       this.form = this.generateForm();
       this.loading.close();
     }
+  }
+
+  private getData(habitId: number): void {
+    forkJoin({
+      habit: this.habitsService.getHabit(habitId),
+    }).subscribe((res) => {
+      this.habit = res.habit;
+      this.form = this.generateForm(this.habit);
+      this.loading.close();
+    });
   }
 
   private generateForm(habit?: Habit): FormGroup {
@@ -68,16 +78,6 @@ export class HabitComponent implements OnInit {
     });
 
     return this.form;
-  }
-
-  private getData(habitId: number): void {
-    forkJoin({
-      habit: this.habitsService.getHabit(habitId),
-    }).subscribe((res) => {
-      this.form = this.generateForm(res.habit);
-      this.habit = res.habit;
-      this.loading.close();
-    });
   }
 
   private getColors(): void {
@@ -110,7 +110,6 @@ export class HabitComponent implements OnInit {
   }
 
   saveHabit(): void {
-    console.log('eee', this.form.value);
     if (this.form.valid) {
       this.loading.open();
       if (this.habit?.habitId) {
@@ -165,5 +164,9 @@ export class HabitComponent implements OnInit {
           this.snackBarService.openError('Error al eliminar el Habito');
         },
       });
+  }
+
+  onBack(): void {
+    this.location.back();
   }
 }

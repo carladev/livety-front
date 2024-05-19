@@ -1,5 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class SnackBarService {
@@ -10,7 +13,7 @@ export class SnackBarService {
       duration: 3000,
       verticalPosition: position ?? 'bottom',
       horizontalPosition: 'center',
-      panelClass: 'ald-snack-bar-success'
+      panelClass: 'app-snack-bar-success',
     });
   }
 
@@ -19,7 +22,7 @@ export class SnackBarService {
       duration: 3000,
       verticalPosition: 'bottom',
       horizontalPosition: 'center',
-      panelClass: 'ald-snack-bar-error'
+      panelClass: 'app-snack-bar-error',
     });
   }
 }

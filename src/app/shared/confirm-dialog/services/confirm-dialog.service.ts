@@ -5,15 +5,15 @@ import { Observable, map } from 'rxjs';
 import { OpenConfirmDialogParams } from '../interfaces/confirm-dialog.interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfirmDialogService {
   constructor(private dialog: MatDialog) {}
 
   open(data: OpenConfirmDialogParams): Observable<boolean> {
     return this.dialog
-      .open(ConfirmDialogComponent, { panelClass: 'ald-confirm-dialog', data })
+      .open(ConfirmDialogComponent, { panelClass: 'app-confirm-dialog', data })
       .afterClosed()
-      .pipe(map(res => !!res));
+      .pipe(map((res) => !!res));
   }
 }

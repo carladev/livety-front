@@ -1,15 +1,14 @@
-<div class="ald-dialog-container">
+<div class="app-dialog-container">
   @if (data.title) {
-    <h1 mat-dialog-title><span [innerHTML]="data.title"></span></h1>
-  }
-  @if (data.message) {
-    <div mat-dialog-content>
-      <div [innerHTML]="data.message || ''"></div>
-    </div>
+  <h1 mat-dialog-title><span [innerHTML]="data.title"></span></h1>
+  } @if (data.message) {
+  <div mat-dialog-content>
+    <div [innerHTML]="data.message || ''"></div>
+  </div>
   }
 
   <div mat-dialog-actions align="center">
-    <button mat-button mat-dialog-close class="ald-round-button">
+    <button mat-button mat-dialog-close class="app-round-button">
       <span [innerHTML]="data.cancelButtonLabel || 'Cancelar'"></span>
     </button>
 
@@ -18,7 +17,7 @@
       [color]="data.acceptButtonColor || 'primary'"
       [mat-dialog-close]="true"
       cdkFocusInitial
-      class="ald-round-button"
+      class="app-round-button"
     >
       <span [innerHTML]="data.acceptButtonLabel || 'Confirmar'"></span>
     </button>

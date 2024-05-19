@@ -122,6 +122,17 @@
       color="primary"
       class="app-round-button"
       type="button"
+      (click)="onBack()"
+    >
+      <span>Cancelar</span>
+      <mat-icon fontIcon="cancel"></mat-icon>
+    </button>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="app-round-button"
+      type="button"
       (click)="saveHabit()"
       [disabled]="form.invalid"
     >

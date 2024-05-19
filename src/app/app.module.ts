@@ -42,6 +42,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HabitComponent } from './habits/containers/habit/habit.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptors';
 import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './register/containers/register/register.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AppRoutingModule } from './app-routing.module';
     HabitsListComponent,
     LayoutComponent,
     LoginComponent,
+    RegisterComponent,
     MenuComponent,
     NotFoundComponent,
     ToolbarComponent,

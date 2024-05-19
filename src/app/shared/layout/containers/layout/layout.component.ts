@@ -67,6 +67,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.confirmDialogService
       .open({
         title: '¿Cerrar sesión?',
+        message: '¿Seguro que quieres cerrar la sesión?',
       })
       .subscribe({
         next: () => {

@@ -13,4 +13,11 @@ export class HabitsListComponent {
   @Output() deleteHabit = new EventEmitter<number>();
   @Output() addHabitRecord = new EventEmitter<Habit>();
   @Output() completeHabitRecord = new EventEmitter<Habit>();
+
+  getProgress(habit: any): number {
+    if (!habit.habitGoal || habit.habitGoal === 0) {
+      return 0;
+    }
+    return (habit.record / habit.habitGoal) * 100;
+  }
 }

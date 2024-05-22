@@ -1,13 +1,14 @@
 @for (habit of habits; track habit) {
-
 <mat-card class="app-card">
-  <div (click)="editHabit.emit(habit.habitId)">
+  <div class="progress-background">
+    <div
+      class="progress-bar"
+      [style.width.%]="getProgress(habit)"
+      [style.backgroundColor]="habit.color"
+    ></div>
+  </div>
+  <div class="content-container" (click)="editHabit.emit(habit.habitId)">
     <mat-card-content class="app-card-content">
-      <mat-progress-bar
-        mode="determinate"
-        [ngStyle]="{ 'background-color': habit.color }"
-        [value]="(habit.record / habit.habitGoal) * 100"
-      ></mat-progress-bar>
       <div class="grid grid-cols-3 items-center">
         <div class="habit-icon-container col-span-1">
           <span class="habit-icon">{{ habit.icon }}</span>
@@ -31,7 +32,6 @@
           >
             <mat-icon>add</mat-icon>
           </button>
-
           <button
             mat-icon-button
             (click)="completeHabitRecord.emit(habit)"
@@ -45,9 +45,3 @@
   </div>
 </mat-card>
 }
-
-<mat-card class="custom-card">
-  <mat-card-content>
-    <!-- Contenido de la tarjeta aquí -->
-  </mat-card-content>
-</mat-card>

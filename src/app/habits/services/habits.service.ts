@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Frenquency, Habit } from '../../shared/models/habit-interface';
 import { format } from 'date-fns';
 import { Observable } from 'rxjs';
+import { Frenquency, Habit } from '../models/habit-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,6 @@ export class HabitsService {
   }
 
   createHabit(habit: Habit): Observable<void> {
-    console.log(habit);
     return this.http.post<void>(`${this.habitAPI}`, { ...habit });
   }
 

@@ -9,14 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, forkJoin, switchMap, tap } from 'rxjs';
 import { ConfirmDialogService } from '../../../shared/confirm-dialog/services/confirm-dialog.service';
 import { LoadingService } from '../../../shared/loading/services/loading.service';
-import {
-  Frenquency,
-  Habit,
-  WeekDay,
-} from '../../../shared/models/habit-interface';
 import { SnackBarService } from '../../../shared/snack-bar/services/snack-bar.service';
 import { HabitsService } from '../../services/habits.service';
 import { Location } from '@angular/common';
+import { Frenquency, Habit, WeekDay } from '../../models/habit-interface';
 @Component({
   selector: 'app-habit',
   templateUrl: './habit.component.html',
@@ -52,6 +48,7 @@ export class HabitComponent implements OnInit {
     if (this.habitId) {
       this.getData(this.habitId);
     }
+    this.loading.close();
   }
 
   private getData(habitId: number): void {
@@ -65,7 +62,6 @@ export class HabitComponent implements OnInit {
   }
 
   private generateForm(habit?: Habit): FormGroup {
-    console.log(habit);
     this.form.set(
       this.fb.group({
         habitName: [habit?.habitName ?? null, [Validators.required]],

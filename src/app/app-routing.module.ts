@@ -7,6 +7,7 @@ import { LoginComponent } from './login/containers/login/login.component';
 import { NotFoundComponent } from './not-found/containers/not-found.component';
 import { RegisterComponent } from './login/containers/register/register.component';
 import { StartComponent } from './login/containers/start/start.component';
+import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
         title: 'Editar habito',
         path: 'edit-habit/:habitId',
         component: HabitComponent,
+      },
+      {
+        title: 'Seguimiento',
+        path: 'tracking',
+        component: TrackingComponent,
       },
     ],
   },

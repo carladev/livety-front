@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 export interface MenuItem {
   title: string;
@@ -10,7 +16,7 @@ export interface MenuItem {
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
   @Input() isHandset?: boolean | null;
@@ -20,28 +26,22 @@ export class MenuComponent {
     {
       title: 'Habitos',
       icon: 'list',
-      link: '/habits'
+      link: '/habits',
     },
     {
       title: 'Nuevo habito',
       icon: 'add',
-      link: '/new-habit'
-    },
-    {
-      title: 'Calendario',
-      icon: 'calendar_month',
-      link: '/calendar'
+      link: '/new-habit',
     },
     {
       title: 'Seguimiento',
       icon: 'equalizer',
-      link: '/reports'
+      link: '/tracking',
     },
     {
       title: 'Configuración',
       icon: 'settings',
-      link: '/settings'
+      link: '/settings',
     },
-   
   ];
 }

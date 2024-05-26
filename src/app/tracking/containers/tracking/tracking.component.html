@@ -1,0 +1,43 @@
+<mat-card class="app-card">
+  <mat-tab-group>
+    <mat-tab label="Semanal">
+      <form [formGroup]="weekForm">
+        <mat-form-field>
+          <mat-label>Número de Semana</mat-label>
+          <input
+            matInput
+            formControlName="weekNumber"
+            type="number"
+            min="1"
+            max="52"
+          />
+        </mat-form-field>
+      </form>
+      <div echarts [options]="chartOption" class="demo-chart"></div>
+    </mat-tab>
+    <mat-tab label="Mensual">
+      <!-- <form [formGroup]="monthForm">
+        <mat-form-field>
+          <mat-label>Mes</mat-label>
+          <input matInput formControlName="month" type="month" />
+        </mat-form-field>
+      </form>
+      <div echarts [options]="chartOption" class="demo-chart"></div>
+    </mat-tab>
+    <mat-tab label="Anual">
+      <form [formGroup]="yearForm">
+        <mat-form-field>
+          <mat-label>Año</mat-label>
+          <input
+            matInput
+            formControlName="year"
+            type="number"
+            min="2000"
+            max="2100"
+          />
+        </mat-form-field>
+      </form>
+      <div echarts [options]="chartOption" class="demo-chart"></div> -->
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

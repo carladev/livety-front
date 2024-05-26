@@ -4,9 +4,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { addDays, subDays } from 'date-fns';
-import { Habit } from '../../../shared/models/habit-interface';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../../shared/snack-bar/services/snack-bar.service';
+import { Habit } from '../../models/habit-interface';
 @Component({
   selector: 'app-habits',
   templateUrl: './habits.component.html',
@@ -27,7 +27,6 @@ export class HabitsComponent implements OnInit {
   ngOnInit() {
     this.getHabits().subscribe((res) => {
       if (!res.length) {
-        console.log('no habits');
         this.router.navigate(['/start']);
       }
       this.habits.set(res);

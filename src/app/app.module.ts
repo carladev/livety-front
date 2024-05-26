@@ -44,7 +44,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptors';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './login/containers/register/register.component';
 import { StartComponent } from './login/containers/start/start.component';
-
+import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +62,7 @@ import { StartComponent } from './login/containers/start/start.component';
     LoadingDialogComponent,
     ConfirmDialogComponent,
     StartComponent,
+    TrackingComponent,
   ],
 
   providers: [
@@ -96,6 +98,9 @@ import { StartComponent } from './login/containers/start/start.component';
     ReactiveFormsModule,
     RouterModule,
     MatDialogModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
 })
 export class AppModule {}

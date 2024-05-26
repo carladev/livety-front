@@ -25,8 +25,8 @@
 
     picture {
       display: block;
-      width: 100%;
-      max-width: 100px;
+      width: 90%;
+      max-width: 90px;
       height: auto;
       margin: 0 auto 8px auto;
 
@@ -41,12 +41,17 @@
       font-size: 32px;
       color: colors.$white;
       margin: 0;
-      text-align: left;
+      text-align: center;
       line-height: 1.25;
 
       span {
         color: colors.$blue;
       }
     }
+  }
+  .app-round-button {
+    margin-top: 24px;
+    font-size: 18px;
+    padding: 24px 32px;
   }
 }

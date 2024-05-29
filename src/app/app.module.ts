@@ -45,7 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './login/containers/register/register.component';
 import { StartComponent } from './login/containers/start/start.component';
 import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,9 +98,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     ReactiveFormsModule,
     RouterModule,
     MatDialogModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
+    NgxChartsModule,
   ],
 })
 export class AppModule {}

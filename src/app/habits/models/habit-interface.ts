@@ -16,7 +16,8 @@ export interface Frenquency {
 }
 
 export interface WeekDay {
-  weekdayId: string;
+  weekdayId: number;
+  weekdayAlias: string;
   weekdayName?: string;
   selected?: boolean;
 }

@@ -1,18 +1,10 @@
-import {
-  Component,
-  DestroyRef,
-  OnDestroy,
-  OnInit,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Color } from '@swimlane/ngx-charts';
 import { TrackingService } from '../../services/tracking.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, switchMap, tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import moment from 'moment';
-import * as echarts from 'echarts';
-import { EChartsOption, HeatmapSeriesOption } from 'echarts';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, tap, takeUntil } from 'rxjs/operators';
+import { getISOWeek } from 'date-fns';
 
 @Component({
   selector: 'app-tracking',
@@ -20,122 +12,79 @@ import { EChartsOption, HeatmapSeriesOption } from 'echarts';
   styleUrls: ['./tracking.component.scss'],
 })
 export class TrackingComponent implements OnInit, OnDestroy {
-  weeklyTracking = signal<any[]>([]);
-  private destroyRef = inject(DestroyRef);
-
+  weeklyData: any[] = [];
+  view: [number, number] = [700, 300];
+  todayWeekNumber = getISOWeek(new Date());
   weekForm: FormGroup;
-  monthForm: FormGroup;
-  yearForm: FormGroup;
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Días de la semana';
+  yAxisLabel: string = 'Hábitos';
 
-  chartOption!: EChartsOption;
+  colorScheme: Color = {
+    domain: ['#d00a0a', '#f3b619', '#DDC753', '#b3ce5e'],
+  };
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private trackingService: TrackingService,
     private fb: FormBuilder
   ) {
-    this.weekForm = this.fb.group({
-      weekNumber: [moment().week()],
-    });
+    this.weekForm = this.generateForm(this.todayWeekNumber);
+  }
 
-    this.monthForm = this.fb.group({
-      month: [new Date().toISOString().substring(0, 7)],
-    });
-
-    this.yearForm = this.fb.group({
-      year: [new Date().getFullYear()],
+  ngOnInit(): void {
+    this.getWeeklyData(this.todayWeekNumber).subscribe((res) => {
+      this.weeklyData = res;
     });
   }
 
-  ngOnInit() {
-    this.getWeeklyTracking().subscribe();
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-    this.weekForm.valueChanges
+  private generateForm(todayWeekNumber: number): FormGroup {
+    const form = this.fb.group({
+      weekNumber: [todayWeekNumber],
+    });
+
+    form.valueChanges
       .pipe(
-        switchMap(() => this.getWeeklyTracking()),
-        takeUntilDestroyed(this.destroyRef)
+        switchMap(() =>
+          this.getWeeklyData(form.get('weekNumber')?.value || todayWeekNumber)
+        ),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
-    this.renderChart();
+    return form;
   }
 
-  ngOnDestroy() {
-    // Clean up subscriptions or other resources here if needed
-  }
-
-  private getWeeklyTracking(): Observable<any[]> {
-    return this.trackingService
-      .getWeeklyTracking(
-        20
-        // this.weekForm.get('weekNumber')?.value || moment().week()
-      )
-      .pipe(
-        tap((tracking: any[]) => {
-          this.weeklyTracking.set(tracking);
-
-          console.log('eeee', this.weeklyTracking);
-          if (tracking.length) {
-            this.chartOption = {
-              title: {
-                top: 30,
-                left: 'center',
-                text: tracking[0].weekNumber + ' Semana',
-              },
-              tooltip: {},
-              visualMap: {
-                min: 0,
-                max: 10000,
-                type: 'piecewise',
-                orient: 'horizontal',
-                left: 'center',
-                top: 65,
-              },
-              calendar: {
-                top: 120,
-                left: 30,
-                right: 30,
-                cellSize: ['auto', 13],
-                range: '2016',
-                itemStyle: {
-                  borderWidth: 0.5,
-                },
-                yearLabel: { show: false },
-              },
-              series: [
-                {
-                  type: 'heatmap',
-                  coordinateSystem: 'calendar',
-                  data: this.getVirtualData(tracking),
-                } as HeatmapSeriesOption,
-              ],
-            };
-          } else {
-            this.chartOption = {
-              title: {
-                top: 30,
-                left: 'center',
-                text: 'Sem registros',
-              },
-            };
-          }
-          this.renderChart();
-        })
-      );
-  }
-
-  private getVirtualData(trackingData: any[]) {
-    const data: [string, number][] = [];
-    trackingData.forEach((habit) => {
-      const date = moment().day('Monday').isoWeek(habit.weekNumber);
-      const dateString = date.format('YYYY-MM-DD');
-      data.push([dateString, habit.weeklyRecord]);
-    });
-    return data;
-  }
-
-  private renderChart() {
-    const chartDom = document.getElementById('heatmap-calendar')!;
-    const myChart = echarts.init(chartDom);
-    myChart.setOption(this.chartOption);
+  private getWeeklyData(weekNumber: number): Observable<any[]> {
+    return this.trackingService.getWeeklyTracking(weekNumber).pipe(
+      tap((data) => {
+        console.log(data);
+        this.weeklyData = data.map((weekdayHabit) => {
+          const habits = Array.isArray(weekdayHabit.habits)
+            ? weekdayHabit.habits
+            : [];
+          return {
+            name: weekdayHabit.weekdayName,
+            series: habits.map((habit: any) => ({
+              name: habit.habitName,
+              value: Number(habit.progress) || 0,
+            })),
+          };
+        });
+        console.log(this.weeklyData);
+      })
+    );
   }
 }

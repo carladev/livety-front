@@ -14,7 +14,7 @@ import { LoadingService } from '../../../shared/loading/services/loading.service
 })
 export class TrackingComponent implements OnInit, OnDestroy {
   weeklyData: any[] = [];
-  view: [number, number] = [700, 300];
+
   todayWeekNumber = getISOWeek(new Date());
   weekForm: FormGroup;
   currentYear = new Date().getFullYear();
@@ -28,7 +28,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Días de la semana';
+  xAxisLabel: string = 'Mapa de calor de habitos';
   yAxisLabel: string = 'Hábitos';
 
   colorScheme: Color = {
@@ -79,10 +79,11 @@ export class TrackingComponent implements OnInit, OnDestroy {
       this.weeklyData = data.map((weekdayHabit) => ({
         name: weekdayHabit.weekdayName,
         series: weekdayHabit.habits.map((habit: any) => ({
-          name: habit.habitName,
+          name: habit.icon,
           value: Number(habit.progress),
         })),
       }));
+      console.log(this.weeklyData);
       return this.weeklyData;
     });
   }

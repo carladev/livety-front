@@ -4,13 +4,11 @@
       <form [formGroup]="weekForm">
         <mat-form-field>
           <mat-label>Número de Semana</mat-label>
-          <input
-            matInput
-            formControlName="weekNumber"
-            type="number"
-            min="1"
-            max="52"
-          />
+          <mat-select formControlName="weekNumber">
+            <mat-option *ngFor="let week of weeksArray" [value]="week">
+              {{ week }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </form>
       <ngx-charts-heat-map

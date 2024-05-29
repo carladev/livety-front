@@ -4,7 +4,8 @@ import { TrackingService } from '../../services/tracking.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, tap, takeUntil } from 'rxjs/operators';
-import { getISOWeek } from 'date-fns';
+import { getISOWeek, getISOWeeksInYear } from 'date-fns';
+import { LoadingService } from '../../../shared/loading/services/loading.service';
 
 @Component({
   selector: 'app-tracking',
@@ -16,6 +17,10 @@ export class TrackingComponent implements OnInit, OnDestroy {
   view: [number, number] = [700, 300];
   todayWeekNumber = getISOWeek(new Date());
   weekForm: FormGroup;
+  currentYear = new Date().getFullYear();
+  weeksArray: number[] = [];
+
+  // options del heatmap
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -34,15 +39,17 @@ export class TrackingComponent implements OnInit, OnDestroy {
 
   constructor(
     private trackingService: TrackingService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loading: LoadingService
   ) {
     this.weekForm = this.generateForm(this.todayWeekNumber);
   }
 
   ngOnInit(): void {
-    this.getWeeklyData(this.todayWeekNumber).subscribe((res) => {
-      this.weeklyData = res;
-    });
+    this.loading.open();
+    this.getWeeklyData(this.todayWeekNumber);
+    this.weeksArray = this.getWeeksArray(this.currentYear);
+    this.loading.close();
   }
 
   ngOnDestroy(): void {
@@ -55,36 +62,32 @@ export class TrackingComponent implements OnInit, OnDestroy {
       weekNumber: [todayWeekNumber],
     });
 
-    form.valueChanges
-      .pipe(
-        switchMap(() =>
-          this.getWeeklyData(form.get('weekNumber')?.value || todayWeekNumber)
-        ),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    form
+      .get('weekNumber')
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((weekNumber) => {
+        if (weekNumber !== null) {
+          this.getWeeklyData(weekNumber);
+        }
+      });
 
     return form;
   }
 
-  private getWeeklyData(weekNumber: number): Observable<any[]> {
-    return this.trackingService.getWeeklyTracking(weekNumber).pipe(
-      tap((data) => {
-        console.log(data);
-        this.weeklyData = data.map((weekdayHabit) => {
-          const habits = Array.isArray(weekdayHabit.habits)
-            ? weekdayHabit.habits
-            : [];
-          return {
-            name: weekdayHabit.weekdayName,
-            series: habits.map((habit: any) => ({
-              name: habit.habitName,
-              value: Number(habit.progress) || 0,
-            })),
-          };
-        });
-        console.log(this.weeklyData);
-      })
-    );
+  private getWeeklyData(weekNumber: number): any {
+    this.trackingService.getWeeklyTracking(weekNumber).subscribe((data) => {
+      this.weeklyData = data.map((weekdayHabit) => ({
+        name: weekdayHabit.weekdayName,
+        series: weekdayHabit.habits.map((habit: any) => ({
+          name: habit.habitName,
+          value: Number(habit.progress),
+        })),
+      }));
+      return this.weeklyData;
+    });
+  }
+  private getWeeksArray(year: number): number[] {
+    const totalWeeks = getISOWeeksInYear(new Date(year, 0, 1));
+    return Array.from({ length: totalWeeks }, (_, i) => i + 1);
   }
 }

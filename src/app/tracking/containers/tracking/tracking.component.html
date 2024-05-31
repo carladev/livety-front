@@ -25,6 +25,33 @@
         </ngx-charts-heat-map>
       </div>
     </mat-tab>
-    <mat-tab label="Mensual"> </mat-tab>
+    <mat-tab label="Mensual">
+      <form [formGroup]="monthForm">
+        <mat-form-field>
+          <mat-label>Número de Semana</mat-label>
+          <mat-select formControlName="monthNumber">
+            <mat-option
+              *ngFor="let month of monthsArray"
+              [value]="month.number"
+            >
+              {{ month.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <div class="chart">
+        <ngx-charts-heat-map
+          [scheme]="colorScheme"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [results]="monthlyData"
+        >
+        </ngx-charts-heat-map>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </mat-card>

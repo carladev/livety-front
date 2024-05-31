@@ -7,12 +7,12 @@
     <h2>Log in</h2>
 
     <mat-form-field appearance="outline">
-      <mat-label>User</mat-label>
+      <mat-label>Usuario</mat-label>
       <input matInput type="text" formControlName="userName" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
+      <mat-label>Contraseña</mat-label>
       <input
         matInput
         formControlName="password"
@@ -33,7 +33,7 @@
     </mat-form-field>
 
     @if (showError()) {
-    <div class="error">Incorrect userName or password</div>
+    <div class="error">Nombre de usuario o contraseña incorrectos</div>
     }
 
     <button
@@ -53,7 +53,7 @@
   </div>
   }
   <p class="sing-up">
-    Don't have an Account?
-    <a [routerLink]="['/register']" target="_self">Sign up</a>
+    ¿Aun no tienes cuenta?
+    <a [routerLink]="['/register']" target="_self">Registrate</a>
   </p>
 </main>

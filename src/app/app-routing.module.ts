@@ -8,6 +8,7 @@ import { NotFoundComponent } from './not-found/containers/not-found.component';
 import { RegisterComponent } from './login/containers/register/register.component';
 import { StartComponent } from './login/containers/start/start.component';
 import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 const routes: Routes = [
   {
@@ -21,12 +22,12 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    title: 'Register',
+    title: 'Registro',
     path: 'register',
     component: RegisterComponent,
   },
   {
-    title: 'Start',
+    title: 'Inicio',
     path: 'start',
     component: StartComponent,
   },
@@ -53,6 +54,11 @@ const routes: Routes = [
         title: 'Seguimiento',
         path: 'tracking',
         component: TrackingComponent,
+      },
+      {
+        title: 'Configuracion',
+        path: 'settings',
+        component: UserSettingsComponent,
       },
     ],
   },

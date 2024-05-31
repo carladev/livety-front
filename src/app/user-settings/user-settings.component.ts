@@ -25,6 +25,7 @@ export class UserSettingsComponent {
   showError = signal(false);
   hidePassword = true;
   form: FormGroup;
+  file: string = '';
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group(
@@ -75,5 +76,23 @@ export class UserSettingsComponent {
     //     this.loading.set(false);
     //   },
     // });
+  }
+
+  onFileChange(event: any) {
+    const files = event.target.files as FileList;
+
+    if (files.length > 0) {
+      const _file = URL.createObjectURL(files[0]);
+      this.file = _file;
+      this.resetInput();
+    }
+  }
+  resetInput() {
+    const input = document.getElementById(
+      'avatar-input-file'
+    ) as HTMLInputElement;
+    if (input) {
+      input.value = '';
+    }
   }
 }

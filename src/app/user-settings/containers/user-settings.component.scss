@@ -1,5 +1,4 @@
-@use "../../styles/colors" as colors;
-
+@use "../../../styles/colors" as colors;
 :host {
   display: flex;
   flex-direction: column;
@@ -13,7 +12,6 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
-
     height: auto;
     background-color: white;
     padding: 42px;
@@ -79,6 +77,11 @@
   }
 }
 
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
 .icon-wrapper {
   position: absolute;
   height: 40px;
@@ -89,8 +92,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  right: 0;
-  top: 75%;
+  right: 10px;
+  bottom: 0;
   z-index: 2;
   cursor: pointer;
 
@@ -125,6 +128,9 @@
   background-size: cover;
 
   &.avatar-placeholder {
-    background-image: url("../../assets/images/default-img.png");
+    background-image: url("../../../assets/images/default-img.png");
   }
+}
+.change-password {
+  margin-bottom: 20px;
 }

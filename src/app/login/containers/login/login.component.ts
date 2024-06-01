@@ -50,12 +50,12 @@ export class LoginComponent {
 
     this.authService.login(userName, password).subscribe({
       next: (response) => {
-        console.log('Logged in successfully');
+        console.log('Logeado con exito');
         this.loading.set(false);
         this.router.navigateByUrl(`/habits`);
       },
       error: (error) => {
-        console.error('Login failed', error);
+        console.error('Ha ocurrido un error en el login', error);
         this.showError.set(true);
         this.loading.set(false);
       },

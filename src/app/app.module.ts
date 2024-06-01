@@ -46,7 +46,7 @@ import { RegisterComponent } from './login/containers/register/register.componen
 import { StartComponent } from './login/containers/start/start.component';
 import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UserSettingsComponent } from './user-settings/containers/user-settings.component';
 @NgModule({
   declarations: [
     AppComponent,

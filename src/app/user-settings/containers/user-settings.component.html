@@ -1,0 +1,104 @@
+<main>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="avatar-container">
+      <div
+        class="image-container"
+        *ngIf="file; else placeholder"
+        [ngStyle]="{ backgroundImage: 'url(' + file + ')' }"
+      ></div>
+
+      <ng-template #placeholder>
+        <div class="image-container avatar-placeholder"></div>
+      </ng-template>
+
+      <label for="avatar-input-file">
+        <div class="icon-wrapper">
+          <input
+            type="file"
+            id="avatar-input-file"
+            accept="image/*"
+            (change)="onFileChange($event)"
+          />
+          <mat-icon class="icon" fontIcon="edit"></mat-icon>
+        </div>
+      </label>
+    </div>
+
+    <h2>Configuración de usuario</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input matInput type="text" formControlName="userName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
+
+    <div class="change-password">
+      <mat-slide-toggle formControlName="changePassword">
+        Cambiar contraseña
+      </mat-slide-toggle>
+    </div>
+
+    <div [hidden]="!form.get('changePassword')?.value">
+      <mat-form-field appearance="outline">
+        <mat-label>Nueva contraseña</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="hidePassword ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Repetir contraseña</mat-label>
+        <input
+          matInput
+          formControlName="repeatPassword"
+          [type]="hidePassword ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div *ngIf="form.hasError('passwordsMismatch')" class="error">
+      Las contraseñas deben coincidir
+    </div>
+
+    <div *ngIf="showError()" class="error">Error al actualizar usuario</div>
+
+    <button
+      mat-flat-button
+      class="app-round-button"
+      type="submit"
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      Guardar
+    </button>
+  </form>
+</main>

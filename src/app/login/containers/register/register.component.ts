@@ -70,12 +70,12 @@ export class RegisterComponent {
 
     this.authService.register(userName, email, password).subscribe({
       next: (response) => {
-        console.log('Register in successfully');
+        console.log('Registrado con exito');
         this.loading.set(false);
         this.router.navigateByUrl(`/habits`);
       },
       error: (error) => {
-        console.error('Register failed', error);
+        console.error('Error en el reguistro', error);
         this.showError.set(true);
         this.loading.set(false);
       },

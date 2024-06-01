@@ -106,7 +106,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
           value: Number(habit.progress),
         })),
       }));
-      console.log(this.weeklyData);
+
       return this.weeklyData;
     });
   }
@@ -119,7 +119,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
           value: Number(habit.progress),
         })),
       }));
-      console.log(this.monthlyData);
+
       return this.monthlyData;
     });
   }

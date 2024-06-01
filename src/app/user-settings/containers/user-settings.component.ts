@@ -13,6 +13,10 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserSettingsService } from '../services/user-settings.service';
+import { User } from '../models/user-interface';
+import { LoadingService } from '../../shared/loading/services/loading.service';
+import { SnackBarService } from '../../shared/snack-bar/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -21,22 +25,57 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSettingsComponent {
-  loading = signal(false);
   showError = signal(false);
   hidePassword = true;
   form: FormGroup;
   file: string = '';
+  user!: User;
+  userId!: number;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserSettingsService,
+    private loading: LoadingService,
+    private snackBarService: SnackBarService
+  ) {
     this.form = this.fb.group(
       {
         userName: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
-        repeatPassword: ['', [Validators.required]],
+        changePassword: [false],
+        password: [''],
+        repeatPassword: [''],
+        photo: [''],
       },
       { validators: this.passwordMatchValidator() }
     );
+
+    this.getData();
+  }
+
+  private getData(): void {
+    this.loading.open();
+    this.userService.getUser().subscribe({
+      next: (user: User) => {
+        this.user = user;
+        this.userId = user.userId;
+        this.form.patchValue({
+          userName: this.user.userName,
+          email: this.user.email,
+          changePassword: false,
+          password: '',
+          repeatPassword: '',
+          photo: this.user.photo,
+        });
+        this.loading.close();
+      },
+      error: () => {
+        this.loading.close();
+        this.snackBarService.openError(
+          'Error al obtener los datos del usuario'
+        );
+      },
+    });
   }
 
   passwordMatchValidator(): ValidatorFn {
@@ -59,23 +98,20 @@ export class UserSettingsComponent {
       return;
     }
 
-    this.loading.set(true);
+    this.loading.open();
     this.showError.set(false);
 
-    const { userName, email, password } = this.form.value;
-
-    // this.authService.register(userName, email, password).subscribe({
-    //   next: (response) => {
-    //     console.log('Register in successfully');
-    //     this.loading.set(false);
-    //     this.router.navigateByUrl(`/habits`);
-    //   },
-    //   error: (error) => {
-    //     console.error('Register failed', error);
-    //     this.showError.set(true);
-    //     this.loading.set(false);
-    //   },
-    // });
+    this.userService.updateUser(this.userId, this.form.value).subscribe({
+      next: () => {
+        console.log('Actualizado con exito');
+        this.loading.close();
+      },
+      error: () => {
+        console.error('La actualización fallo');
+        this.showError.set(true);
+        this.loading.close();
+      },
+    });
   }
 
   onFileChange(event: any) {
@@ -84,9 +120,11 @@ export class UserSettingsComponent {
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       this.file = _file;
+      this.form.get('photo')?.setValue(_file);
       this.resetInput();
     }
   }
+
   resetInput() {
     const input = document.getElementById(
       'avatar-input-file'

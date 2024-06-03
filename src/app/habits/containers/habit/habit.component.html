@@ -65,7 +65,7 @@
 
         <div *ngIf="form().get('frequencyId')?.value === 'D'" class="week-days">
           <mat-label>Días de la semana</mat-label>
-          <div formControlName="weekDays">
+          <div>
             @for (weekDay of weekDays(); track weekDay) {
             <button
               mat-flat-button

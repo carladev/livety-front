@@ -13,7 +13,6 @@ import { SnackBarService } from '../../../shared/snack-bar/services/snack-bar.se
 import { HabitsService } from '../../services/habits.service';
 import { Location } from '@angular/common';
 import { Frenquency, Habit, WeekDay } from '../../models/habit-interface';
-import { startOfWeek } from 'date-fns';
 
 @Component({
   selector: 'app-habit',

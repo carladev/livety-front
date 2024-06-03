@@ -116,11 +116,15 @@ export class UserSettingsComponent {
 
   onFileChange(event: any) {
     const files = event.target.files as FileList;
-
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       this.file = _file;
-      this.form.get('photo')?.setValue(_file);
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = () => {
+        this.form.get('photo')?.setValue(reader.result);
+      };
+
       this.resetInput();
     }
   }

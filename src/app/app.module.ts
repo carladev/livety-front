@@ -47,6 +47,7 @@ import { StartComponent } from './login/containers/start/start.component';
 import { TrackingComponent } from './tracking/containers/tracking/tracking.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserSettingsComponent } from './user-settings/containers/user-settings.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,6 +102,7 @@ import { UserSettingsComponent } from './user-settings/containers/user-settings.
     RouterModule,
     MatDialogModule,
     NgxChartsModule,
+    CommonModule,
   ],
 })
 export class AppModule {}

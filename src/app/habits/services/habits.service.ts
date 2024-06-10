@@ -34,8 +34,8 @@ export class HabitsService {
   }
 
   updateHabit(habitId: number, habit: Habit): Observable<void> {
-    return this.http.post<void>(`${this.habitsAPI}/update/${habitId}`, {
-      habit,
+    return this.http.post<void>(`${this.habitAPI}/update/${habitId}`, {
+      ...habit,
     });
   }
 
@@ -44,7 +44,7 @@ export class HabitsService {
   }
 
   deleteHabit(habitId: number): Observable<void> {
-    return this.http.post<void>(`${this.habitAPI}/delelte/${habitId}`, {});
+    return this.http.post<void>(`${this.habitAPI}/delete/${habitId}`, {});
   }
 
   addHabitRecord(

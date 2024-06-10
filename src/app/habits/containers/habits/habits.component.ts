@@ -81,6 +81,28 @@ export class HabitsComponent implements OnInit {
     this.router.navigateByUrl(`/edit-habit/${habitId}`);
   }
 
+  removeHabitRecord(habit: Habit): void {
+    this.habitsService
+      .addHabitRecord(
+        habit.habitId,
+        habit.record - 1,
+        this.habitsDateFilterForm.get('habitDate')?.value || new Date()
+      )
+      .subscribe({
+        next: () => {
+          this.getHabits().subscribe((res) => {
+            this.habits.set(res);
+          });
+          this.snackBarService.openSuccess('Registro de habito actualizada');
+        },
+        error: () => {
+          this.snackBarService.openError(
+            'Error al actualizar el registro del habito'
+          );
+        },
+      });
+  }
+
   addHabitRecord(habit: Habit): void {
     this.habitsService
       .addHabitRecord(

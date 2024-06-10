@@ -11,6 +11,7 @@ export class HabitsListComponent {
   @Output() duplicateHabit = new EventEmitter<number>();
   @Output() editHabit = new EventEmitter<number>();
   @Output() deleteHabit = new EventEmitter<number>();
+  @Output() removeHabitRecord = new EventEmitter<Habit>();
   @Output() addHabitRecord = new EventEmitter<Habit>();
   @Output() completeHabitRecord = new EventEmitter<Habit>();
 

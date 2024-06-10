@@ -51,11 +51,9 @@ export class TrackingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loading.open();
     this.getWeeklyData(this.todayWeekNumber);
     this.weeksArray = this.getWeeksArray(this.currentYear);
     this.monthsArray = this.getMonthsArray(this.currentYear);
-    this.loading.close();
     this.getMonthlyData(this.todayMonthNumber);
   }
 
@@ -98,6 +96,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
     return form;
   }
   private getWeeklyData(weekNumber: number): any {
+    this.loading.open();
     this.trackingService.getWeeklyTracking(weekNumber).subscribe((data) => {
       this.weeklyData = data.map((weekdayHabit) => ({
         name: weekdayHabit.weekdayName,
@@ -106,11 +105,12 @@ export class TrackingComponent implements OnInit, OnDestroy {
           value: Number(habit.progress),
         })),
       }));
-
+      this.loading.close();
       return this.weeklyData;
     });
   }
   private getMonthlyData(monthNumber: number): any {
+    this.loading.open();
     this.trackingService.getMonthlyTracking(monthNumber).subscribe((data) => {
       this.monthlyData = data.map((monthdayHabit) => ({
         name: monthdayHabit.monthdayNumber,
@@ -119,7 +119,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
           value: Number(habit.progress),
         })),
       }));
-
+      this.loading.close();
       return this.monthlyData;
     });
   }

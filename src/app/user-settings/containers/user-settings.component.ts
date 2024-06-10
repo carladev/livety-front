@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,7 +7,6 @@ import {
   ValidationErrors,
   AbstractControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserSettingsService } from '../services/user-settings.service';
 import { User } from '../models/user-interface';
 import { LoadingService } from '../../shared/loading/services/loading.service';
@@ -104,11 +98,11 @@ export class UserSettingsComponent {
 
     this.userService.updateUser(this.userId, this.form.value).subscribe({
       next: () => {
-        this.snackBarService.openSuccess('Usuario actualizado con exito');
+        this.snackBarService.openSuccess('Usuario actualizado con éxito');
         this.loading.close();
       },
       error: () => {
-        this.snackBarService.openSuccess('Error al actualizar el usuario');
+        this.snackBarService.openError('Error al actualizar el usuario');
         this.showError.set(true);
         this.loading.close();
       },
@@ -126,17 +120,6 @@ export class UserSettingsComponent {
         this.form.get('photo')?.setValue(reader.result);
         this.file = reader.result as string;
       };
-
-      this.resetInput();
-    }
-  }
-
-  resetInput() {
-    const input = document.getElementById(
-      'avatar-input-file'
-    ) as HTMLInputElement;
-    if (input) {
-      input.value = '';
     }
   }
 }

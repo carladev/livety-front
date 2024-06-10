@@ -19,6 +19,7 @@
               ><b>{{ habit.habitName }}</b></span
             >
           </div>
+
           <div>
             {{ habit.record ? habit.record : 0 }}/{{ habit.habitGoal }}
             {{ habit.habitGoalUnit }}
@@ -32,6 +33,19 @@
           </span>
           <div class="flex justify-center">
             <button
+              [disabled]="habit.record == null || habit.record == 0"
+              matTooltip="Eliminar un registro"
+              aria-label="Remove"
+              mat-icon-button
+              (click)="removeHabitRecord.emit(habit)"
+              (click)="$event.stopPropagation()"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <button
+              [disabled]="habit.record == habit.habitGoal"
+              matTooltip="Añadir un registro"
+              aria-label="Add"
               mat-icon-button
               (click)="addHabitRecord.emit(habit)"
               (click)="$event.stopPropagation()"
@@ -39,6 +53,9 @@
               <mat-icon>add</mat-icon>
             </button>
             <button
+              [disabled]="habit.record == habit.habitGoal"
+              matTooltip="Completar registro del día"
+              aria-label="Complete"
               mat-icon-button
               (click)="completeHabitRecord.emit(habit)"
               (click)="$event.stopPropagation()"

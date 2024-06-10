@@ -32,7 +32,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Mapa de calor de habitos';
+  xAxisLabel: string = '% de exito en el registro de habitos';
   yAxisLabel: string = 'Hábitos';
 
   colorScheme: Color = {

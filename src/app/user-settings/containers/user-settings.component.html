@@ -3,8 +3,8 @@
     <div class="avatar-container">
       <div
         class="image-container"
-        *ngIf="file; else placeholder"
-        [ngStyle]="{ backgroundImage: 'url(' + file + ')' }"
+        *ngIf="form.get('photo')?.value; else placeholder"
+        [ngStyle]="{ backgroundImage: 'url(' + form.get('photo')?.value + ')' }"
       ></div>
 
       <ng-template #placeholder>

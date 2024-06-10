@@ -63,13 +63,16 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf="form().get('frequencyId')?.value === 'D'" class="week-days">
-          <mat-label>Días de la semana</mat-label>
-          <div>
+        <div
+          *ngIf="form().get('frequencyId')?.value === 'D'"
+          class="week-days-containers pb-4"
+        >
+          <mat-label class="p-4">Días de la semana</mat-label>
+          <div class="week-days">
             @for (weekDay of weekDays(); track weekDay) {
             <button
               mat-flat-button
-              [color]="weekDay.selected ? 'primary' : 'basic'"
+              [color]="weekDay.selected ? 'accent' : 'primary'"
               class="weekday-button"
               type="button"
               (click)="toggleWeekDaySelection(weekDay)"

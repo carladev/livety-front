@@ -1,9 +1,9 @@
-@use 'colors' as colors;
+@use "colors" as colors;
 
 $primary-color: colors.$blue;
 $primary-contrast-color: colors.$white;
 
-$accent-color: colors.$white;
+$accent-color: colors.$green;
 $accent-contrast-color: colors.$blue;
 
 $warn-color: colors.$red;
@@ -38,8 +38,8 @@ $primary: (
     A100: $primary-contrast-color,
     A200: $primary-contrast-color,
     A400: $primary-contrast-color,
-    A700: $primary-contrast-color
-  )
+    A700: $primary-contrast-color,
+  ),
 );
 
 $accent: (
@@ -71,8 +71,8 @@ $accent: (
     A100: $accent-contrast-color,
     A200: $accent-contrast-color,
     A400: $accent-contrast-color,
-    A700: $accent-contrast-color
-  )
+    A700: $accent-contrast-color,
+  ),
 );
 
 $warn: (
@@ -104,6 +104,6 @@ $warn: (
     A100: $warn-contrast-color,
     A200: $warn-contrast-color,
     A400: $warn-contrast-color,
-    A700: $warn-contrast-color
-  )
+    A700: $warn-contrast-color,
+  ),
 );

@@ -4,6 +4,7 @@ export interface Habit {
   color: string;
   icon: string;
   frequencyId: string;
+  frequencyName: string;
   weekDays: WeekDay[];
   habitGoal: number;
   habitGoalUnit: string;

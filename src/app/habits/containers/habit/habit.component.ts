@@ -117,6 +117,7 @@ export class HabitComponent implements OnInit {
             next: () => {
               this.loading.close();
               this.snackBarService.openSuccess('Habito editado con exito');
+              this.router.navigate(['/habits']);
             },
             error: () => {
               this.loading.close();
@@ -128,10 +129,11 @@ export class HabitComponent implements OnInit {
           next: () => {
             this.loading.close();
             this.snackBarService.openSuccess('Habito creado con exito');
+            this.router.navigate(['/habits']);
           },
           error: () => {
             this.loading.close();
-            this.snackBarService.openError('Error al crear el Habito');
+            this.snackBarService.openError('Error al crear el habito');
           },
         });
       }

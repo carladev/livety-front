@@ -67,6 +67,7 @@ export class UserSettingsComponent {
           repeatPassword: '',
           photo: this.user.photo,
         });
+        this.file = this.user.photo;
         this.loading.close();
       },
       error: () => {
@@ -103,11 +104,11 @@ export class UserSettingsComponent {
 
     this.userService.updateUser(this.userId, this.form.value).subscribe({
       next: () => {
-        console.log('Actualizado con exito');
+        this.snackBarService.openSuccess('Usuario actualizado con exito');
         this.loading.close();
       },
       error: () => {
-        console.error('La actualización fallo');
+        this.snackBarService.openSuccess('Error al actualizar el usuario');
         this.showError.set(true);
         this.loading.close();
       },
@@ -123,6 +124,7 @@ export class UserSettingsComponent {
       reader.readAsDataURL(files[0]);
       reader.onload = () => {
         this.form.get('photo')?.setValue(reader.result);
+        this.file = reader.result as string;
       };
 
       this.resetInput();

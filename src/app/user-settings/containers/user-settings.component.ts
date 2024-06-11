@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  signal,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -30,7 +35,8 @@ export class UserSettingsComponent {
     private fb: FormBuilder,
     private userService: UserSettingsService,
     private loading: LoadingService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group(
       {
@@ -112,13 +118,15 @@ export class UserSettingsComponent {
   onFileChange(event: any) {
     const files = event.target.files as FileList;
     if (files.length > 0) {
-      const _file = URL.createObjectURL(files[0]);
-      this.file = _file;
+      const newFile = URL.createObjectURL(files[0]);
+      this.file = newFile;
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = () => {
         this.form.get('photo')?.setValue(reader.result);
         this.file = reader.result as string;
+
+        this.cdr.markForCheck();
       };
     }
   }

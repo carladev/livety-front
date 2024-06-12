@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: .
+    container_name: livety-front
+    networks:
+      - livety-api_livety_network
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+
+networks:
+  livety-api_livety_network:
+    external: true

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Color } from '@swimlane/ngx-charts';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { TrackingService } from '../../services/tracking.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -36,6 +36,9 @@ export class TrackingComponent implements OnInit, OnDestroy {
   yAxisLabel: string = 'Hábitos';
 
   colorScheme: Color = {
+    name: 'colors',
+    selectable: true,
+    group: ScaleType.Linear,
     domain: ['#d00a0a', '#f3b619', '#DDC753', '#b3ce5e'],
   };
 

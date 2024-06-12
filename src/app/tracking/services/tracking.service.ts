@@ -1,13 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrackingService {
-  private readonly weeklyTrackingAPI = '/api/weekly-tracking';
-  private readonly monthlyTrackingAPI = '/api/monthly-tracking';
+  private apiUrl = environment.apiUrl;
+  private readonly weeklyTrackingAPI = `${this.apiUrl}weekly-tracking`;
+  private readonly monthlyTrackingAPI = `${this.apiUrl}monthly-tracking`;
 
   constructor(private http: HttpClient) {}
   getWeeklyTracking(weekNumber: number): Observable<any[]> {

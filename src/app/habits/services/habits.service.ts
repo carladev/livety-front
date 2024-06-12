@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { format } from 'date-fns';
 import { Observable } from 'rxjs';
 import { Frenquency, Habit } from '../models/habit-interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HabitsService {
-  private readonly habitsAPI = '/api/habits';
-  private readonly habitAPI = '/api/habit';
+  private apiUrl = environment.apiUrl;
+
+  private readonly habitsAPI = `${this.apiUrl}/habits`;
+  private readonly habitAPI = `${this.apiUrl}/habit`;
 
   constructor(private http: HttpClient) {}
   getHabits(habitDate: Date) {

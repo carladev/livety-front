@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loginAPI = '/api/login';
-  private registerAPI = '/api/register';
+  private apiUrl = environment.apiUrl;
+  private loginAPI = `${this.apiUrl}/login`;
+  private registerAPI = `${this.apiUrl}/register`;
   private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
   >(null);
@@ -36,8 +38,11 @@ export class AuthService {
     return this.http
       .post<any>(this.registerAPI, { userName, email, password })
       .pipe(
-        tap(() => {
-          this.login(userName, password);
+        tap((response) => {
+          if (response.token) {
+            localStorage.setItem('token', response.token);
+            this.tokenSubject.next(response.token);
+          }
         })
       );
   }

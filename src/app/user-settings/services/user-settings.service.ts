@@ -2,13 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user-interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserSettingsService {
-  private readonly userAPI = '/api/user';
-  private readonly updateUserAPI = '/api/update-user';
+  private apiUrl = environment.apiUrl;
+  private readonly userAPI = `${this.apiUrl}/user`;
+  private readonly updateUserAPI = `${this.apiUrl}/update-user`;
 
   constructor(private http: HttpClient) {}
   getUser(): Observable<User> {

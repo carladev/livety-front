@@ -134,7 +134,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
   }
 
   private getMonthsArray(year: number) {
-    this.monthsArray = []; // Asegúrate de inicializar o limpiar el array antes de llenarlo
+    this.monthsArray = [];
     for (let i = 1; i <= 12; i++) {
       const monthName = format(new Date(year, i - 1, 1), 'MMMM', {
         locale: es,

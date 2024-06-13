@@ -56,7 +56,7 @@ const routes: Routes = [
         component: TrackingComponent,
       },
       {
-        title: 'Configuracion',
+        title: 'Configuración',
         path: 'settings',
         component: UserSettingsComponent,
       },

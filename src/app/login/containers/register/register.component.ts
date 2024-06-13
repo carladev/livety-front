@@ -1,16 +1,11 @@
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
-import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
+  ValidationErrors,
   ValidatorFn,
   Validators,
-  ValidationErrors,
-  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';

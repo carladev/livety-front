@@ -1,31 +1,35 @@
-# LivetyFront
+# Livety-front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+## Descargar Repositorio
 
-## Development server
+Descargar el repositorio desde GitHub descargado el zip o clonando el repo:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+git clone https://github.com/carladev/livety-front.git
+cd liberty-front
+```
 
-## Code scaffolding
+## Producción
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Requisitos Previos
 
-## Build
+- Docker: [Instalar Docker](https://docs.docker.com/get-docker/)
+- Docker Compose: [Instalar Docker Compose](https://docs.docker.com/compose/install/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Levantar contenedor de Docker
 
-## Running unit tests
+```bash
+docker-compose up -d
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Desarollo (solo usar para desarollo)
 
-## Running end-to-end tests
+Levantar imagen de mysql en docker
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## Extra
-
-npm install @angular/material-moment-adapter
+```bash
+npm run start
+```

@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { TrackingService } from '../../services/tracking.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
-import { switchMap, tap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { format, getISOWeek, getISOWeeksInYear } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { LoadingService } from '../../../shared/loading/services/loading.service';
 
 @Component({
@@ -104,7 +105,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
       this.weeklyData = data.map((weekdayHabit) => ({
         name: weekdayHabit.weekdayName,
         series: weekdayHabit.habits.map((habit: any) => ({
-          name: habit.icon,
+          name: habit.icon + ' ' + habit.habitName,
           value: Number(habit.progress),
         })),
       }));
@@ -118,7 +119,7 @@ export class TrackingComponent implements OnInit, OnDestroy {
       this.monthlyData = data.map((monthdayHabit) => ({
         name: monthdayHabit.monthdayNumber,
         series: monthdayHabit.habits.map((habit: any) => ({
-          name: habit.icon,
+          name: habit.icon + ' ' + habit.habitName,
           value: Number(habit.progress),
         })),
       }));
@@ -133,8 +134,11 @@ export class TrackingComponent implements OnInit, OnDestroy {
   }
 
   private getMonthsArray(year: number) {
+    this.monthsArray = []; // Asegúrate de inicializar o limpiar el array antes de llenarlo
     for (let i = 1; i <= 12; i++) {
-      const monthName = format(new Date(year, i - 1, 1), 'MMMM');
+      const monthName = format(new Date(year, i - 1, 1), 'MMMM', {
+        locale: es,
+      });
       this.monthsArray.push({ name: monthName, number: i });
     }
     return this.monthsArray;

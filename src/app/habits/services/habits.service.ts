@@ -28,8 +28,8 @@ export class HabitsService {
   getColors() {
     return this.http.get<any[]>(`${this.habitsAPI}/colors`);
   }
-  getWeekDays() {
-    return this.http.get<any[]>(`${this.habitsAPI}/week-days`);
+  getWeekDays(habitId: number) {
+    return this.http.get<any[]>(`${this.habitsAPI}/week-days/${habitId}`);
   }
 
   getHabit(habitId: number) {

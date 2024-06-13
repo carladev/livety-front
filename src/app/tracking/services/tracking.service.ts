@@ -8,8 +8,8 @@ import { environment } from '../../../environments/environment';
 })
 export class TrackingService {
   private apiUrl = environment.apiUrl;
-  private readonly weeklyTrackingAPI = `${this.apiUrl}weekly-tracking`;
-  private readonly monthlyTrackingAPI = `${this.apiUrl}monthly-tracking`;
+  private readonly weeklyTrackingAPI = `${this.apiUrl}/weekly-tracking`;
+  private readonly monthlyTrackingAPI = `${this.apiUrl}/monthly-tracking`;
 
   constructor(private http: HttpClient) {}
   getWeeklyTracking(weekNumber: number): Observable<any[]> {

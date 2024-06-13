@@ -43,8 +43,8 @@ export class HabitComponent implements OnInit {
     this.loading.open();
     this.getFrequencies();
     this.getColors();
-    this.getWeekDays();
     this.habitId = Number(this.activatedRoute.snapshot.params?.['habitId']);
+    this.getWeekDays();
     this.form.set(this.generateForm());
     if (this.habitId) {
       this.getData(this.habitId);
@@ -89,9 +89,11 @@ export class HabitComponent implements OnInit {
       .subscribe((frequencies) => this.frequencies.set(frequencies));
   }
   private getWeekDays(): void {
-    this.habitsService.getWeekDays().subscribe((weekDays) => {
-      this.weekDays.set(weekDays);
-    });
+    this.habitsService
+      .getWeekDays(this.habitId ? this.habitId : 0)
+      .subscribe((weekDays) => {
+        this.weekDays.set(weekDays);
+      });
   }
   setColor(color: string) {
     this.form().get('color')?.setValue(color);

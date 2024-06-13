@@ -11,7 +11,7 @@ mat-form-field {
 .chart {
   max-height: 500px;
   max-width: 95%;
-
+  min-width: 420px;
   &.monthly {
     min-width: 720px;
   }
